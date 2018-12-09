@@ -1,1 +1,1 @@
-# Projektowanie doświadczen użytkownika
+# Projektowanie doświadczeń użytkownika
