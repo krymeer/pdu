@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".StartScreen">
+
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="82dp"
+        android:fontFamily="@font/finger_paint"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".18" />
+
+    <TextView
+        app:layout_constraintEnd_toEndOf="@id/app_title"
+        app:layout_constraintTop_toBottomOf="@id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_version"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="12sp"/>
+
+    <Button
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        android:id="@+id/btn_log_in"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/roboto"
+        android:text="@string/log_in"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        />
+
+
+    <Button
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_log_in"
+        android:id="@+id/btn_sign_up"
+        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/roboto"
+        android:text="@string/sign_up"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="@string/see_demo"
+        android:textColor="@color/colorExtra"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".8" />
+</android.support.constraint.ConstraintLayout>

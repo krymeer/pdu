@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Place zabaw</string>
+    <string name="app_version">v0.0.666</string>
+    <string name="sign_up">Zarejestruj się</string>
+    <string name="log_in">Zaloguj się</string>
+    <string name="see_demo">Zobacz demo</string>
+</resources>
