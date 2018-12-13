@@ -27,8 +27,8 @@
             android:label="@string/title_activity_login_screen" />
         <activity
             android:name=".MainScreen"
-            android:label="@string/title_activity_main_screen" />
-
+            android:label="@string/title_activity_main_screen"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/user_ico"
+            android:title="@string/hamburger_menu_profile" />
+        <item
+            android:id="@+id/nav_add_playground"
+            android:icon="@drawable/add_ico"
+            android:title="@string/hamburger_menu_add_playground" />
+        <item
+            android:id="@+id/nav_delete_playground"
+            android:icon="@drawable/remove_ico"
+            android:title="@string/hamburger_menu_delete_playground" />
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@drawable/report_ico"
+            android:title="@string/hamburger_menu_report" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout_ico"
+            android:title="@string/hamburger_menu_log_out" />
+    </group>
+
+
+</menu>
