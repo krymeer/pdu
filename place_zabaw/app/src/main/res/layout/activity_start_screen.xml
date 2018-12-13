@@ -47,6 +47,7 @@
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="30sp"
+        android:onClick="onLoginClick"
         />
 
 

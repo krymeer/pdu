@@ -4,4 +4,19 @@
     <string name="sign_up">Zarejestruj się</string>
     <string name="log_in">Zaloguj się</string>
     <string name="see_demo">Zobacz demo</string>
+    <string name="title_activity_login_screen">Zaloguj</string>
+    <string name="title_activity_main_screen">Ekran główny</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Hasło</string>
+    <string name="action_sign_in">Zaloguj się lub zarejestruj</string>
+    <string name="action_sign_in_short">Zaloguj</string>
+    <string name="error_invalid_email">Niepoprawny adres email</string>
+    <string name="error_invalid_password">Hasło jest za krótkie</string>
+    <string name="error_incorrect_password">Hasło nieprawidłowe</string>
+    <string name="error_field_required">To pole jest wymagane</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 </resources>
