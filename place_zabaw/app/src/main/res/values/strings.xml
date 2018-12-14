@@ -5,7 +5,10 @@
     <string name="log_in">Zaloguj się</string>
     <string name="see_demo">Zobacz demo</string>
     <string name="title_activity_login_screen">Zaloguj</string>
-    <string name="title_activity_main_screen">Ekran główny</string>
+    <string name="title_activity_main_screen">Pulpit</string>
+
+    <!-- Main Screen -->
+    <string name="your_playgrounds">Ostatnio przeglądane</string>
 
     <!-- Hamburger menu -->
     <string name="hamburger_menu_profile">Mój profil</string>

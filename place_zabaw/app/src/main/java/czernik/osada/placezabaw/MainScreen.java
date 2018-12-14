@@ -39,7 +39,7 @@ public class MainScreen extends AppCompatActivity
         initToolbar();
         initHamburgetMenu();
         initPlaygroundFavoriteList();
-        initFAB();
+//        initFAB();
     }
 
     private void initToolbar() {
@@ -59,13 +59,7 @@ public class MainScreen extends AppCompatActivity
     }
 
     private void initPlaygroundFavoriteList() {
-        List<PlaygroundSearchListItem> itemsList = new ArrayList<>(6);
-        itemsList.add(new PlaygroundSearchListItem("Wrocław, al. Kromera 67", "1,5 km", null, 4.5f));
-        itemsList.add(new PlaygroundSearchListItem("Wrocław, ul. Nowowiesjka 5", "2,5 km", null, 3.5f));
-        itemsList.add(new PlaygroundSearchListItem("Wrocław, pl. Grunwaldzki 103", "3,7 km", null, 1.5f));
-        itemsList.add(new PlaygroundSearchListItem("Wrocław, ul. Kościuszki 67", "6,1 km", null, 2.0f));
-        itemsList.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
-        itemsList.add(new PlaygroundSearchListItem("Wrocław, pl. Powstańców Śląskich 1", "10,5 km", null, 4.8f));
+        List<PlaygroundSearchListItem> itemsList = getFavoritePlaygrounds(5);
 
         PlaygroundsListAdapter playgroundsListAdapter = new PlaygroundsListAdapter(this, itemsList);
         favoritePlaygroundsListView = (ListView) findViewById(R.id.favoritePlaygroundsList);
@@ -77,6 +71,17 @@ public class MainScreen extends AppCompatActivity
             }
         });
         favoritePlaygroundsListView.setAdapter(playgroundsListAdapter);
+    }
+
+    private List<PlaygroundSearchListItem> getFavoritePlaygrounds(int count) {
+        List<PlaygroundSearchListItem> favorites  = new ArrayList<>(5);
+        favorites.add(new PlaygroundSearchListItem("Wrocław, al. Kromera 67", "1,5 km", null, 4.5f));
+        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Nowowiesjka 5", "2,5 km", null, 3.5f));
+        favorites.add(new PlaygroundSearchListItem("Wrocław, pl. Grunwaldzki 103", "3,7 km", null, 1.5f));
+        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Kościuszki 67", "6,1 km", null, 2.0f));
+        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
+
+        return favorites;
     }
 
     private void initFAB() {

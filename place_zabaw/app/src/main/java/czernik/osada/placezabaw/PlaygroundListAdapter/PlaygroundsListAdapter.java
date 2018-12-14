@@ -1,6 +1,9 @@
 package czernik.osada.placezabaw.PlaygroundListAdapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +66,15 @@ public class PlaygroundsListAdapter extends BaseAdapter {
             imageView.setImageBitmap(currentItem.getMiniature());
         }
 
+        setRatingBarColor(ratingBar);
+
         // returns the view for the current row
         return view;
+    }
+
+    private void setRatingBarColor(RatingBar ratingBar) {
+        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(Color.rgb(255, 128, 0), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
     }
 }
