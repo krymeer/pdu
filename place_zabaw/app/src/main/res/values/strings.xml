@@ -6,6 +6,7 @@
     <string name="see_demo">Zobacz demo</string>
     <string name="title_activity_login_screen">Zaloguj</string>
     <string name="title_activity_main_screen">Pulpit</string>
+    <string name="title_activity_search_screen">Wyszukaj</string>
 
     <!-- Main Screen -->
     <string name="your_playgrounds">Ostatnio przeglądane</string>
@@ -37,6 +38,14 @@
     <string name="nav_header_subtitle">Wyszukuj, odwiedzaj, oceniaj!</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_search">Wyszukaj</string>
+    <string name="prompt_street">ulica, osiedle, plac...</string>
+    <string name="search_filters_extra">Dodatkowe filtry</string>
+    <string name="search_filter_entry_free">Wstęp wolny</string>
+    <string name="prompt_price_from">Cena od:</string>
+    <string name="prompt_price_to">Cena do:</string>
+    <string name="prompt_rating_from">Ocena od:</string>
+    <string name="prompt_rating_to">Ocena do:</string>
+    <string name="prompt_functionalities">Kliknij, aby dodać funkcjonalności</string>
 
 
 </resources>

@@ -121,7 +121,8 @@ public class MainScreen extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            Toast.makeText(this, "Search clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, SearchScreen.class);
+            startActivity(intent);
             return true;
         }
 
@@ -159,6 +160,7 @@ public class MainScreen extends AppCompatActivity
     }
 
     public void onSearchButtonClick(View view) {
-        Toast.makeText(this, "Search clicked", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, SearchScreen.class);
+        startActivity(intent);
     }
 }
