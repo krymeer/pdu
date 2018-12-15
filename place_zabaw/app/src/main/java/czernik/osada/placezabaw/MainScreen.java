@@ -1,9 +1,11 @@
 package czernik.osada.placezabaw;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -144,6 +146,7 @@ public class MainScreen extends AppCompatActivity
         } else if (id == R.id.nav_report) {
             Toast.makeText(this, "Report clicked", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_logout) {
+            logOut();
             Toast.makeText(this, "Logout clicked", Toast.LENGTH_LONG).show();
         }
 
@@ -152,7 +155,25 @@ public class MainScreen extends AppCompatActivity
         return true;
     }
 
-    public void minimizeApp() {
+    private void logOut() {
+        AlertDialog.Builder adb = new AlertDialog.Builder(this);
+        adb.setTitle(R.string.logout_alert);
+        adb.setIcon(android.R.drawable.ic_dialog_alert);
+
+        adb.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(MainScreen.this, StartScreen.class);
+                startActivity(intent);
+            } });
+
+        adb.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            } });
+
+        adb.show();
+    }
+
+    private void minimizeApp() {
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

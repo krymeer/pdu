@@ -46,6 +46,10 @@
     <string name="prompt_rating_from">Ocena od:</string>
     <string name="prompt_rating_to">Ocena do:</string>
     <string name="prompt_functionalities">Kliknij, aby dodać funkcjonalności</string>
+    <string name="logout_alert">Czy na pewno chcesz się wylogować?</string>
+    <string name="confirm">Tak</string>
+    <string name="cancel">Nie</string>
+    <string name="click_to_add_functionalities">Kliknij, aby dodać funkcjonalności</string>
 
 
 </resources>
