@@ -51,6 +51,17 @@
     <string name="cancel">Nie</string>
     <string name="click_to_add_functionalities">Kliknij, aby dodać funkcjonalności</string>
     <string name="search_result_text">Wyniki wyszukiwania:</string>
+    <string name="title_activity_playground_details_screen">PlaygroundDetailsScreen</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_register">Register</string>
+    <string name="prompt_name">Imię i nazwisko</string>
+    <string name="action_register">Rejestruj</string>
+    <string name="acceptance_of_regulations">Akceptuję regulamin</string>
+    <string name="rodo_text">Wyrażam zgodę na przetwarzanie danych osobowych przez Place Zabaw Sp. z o.o. z siedzibą przy ul. Łukasiewicza 8, 50-337 Wrocław, w celu zapewnienia prawidłowego funkcjonowania serwisu</string>
+    <string name="marketing_content">Wyrażam zgode na przesyłanie treści marketingowych na podanych wyżej adres e-mail</string>
+    <string name="error_password_not_identical">Hasła muszą być takie same!</string>
+    <string name="prompt_repeat_password">Powtórz hasło</string>
 
 
 </resources>

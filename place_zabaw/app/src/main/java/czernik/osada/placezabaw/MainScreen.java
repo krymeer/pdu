@@ -102,14 +102,21 @@ public class MainScreen extends AppCompatActivity
         playgroundsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                PlaygroundSearchListItem item = (PlaygroundSearchListItem) adapterView.getItemAtPosition(i);
-                Toast.makeText(MainScreen.this, item.getLocation(), Toast.LENGTH_LONG).show();
+                onPlaygroundListItemClicked(adapterView, view, i, l);
             }
         });
         playgroundsListView.setAdapter(playgroundsListAdapter);
 
         playgroundsListView.addHeaderView(listHeaderText);
         playgroundsListView.addFooterView(searchButton);
+    }
+
+    private void onPlaygroundListItemClicked(AdapterView<?> adapterView, View view, int i, long l) {
+        PlaygroundSearchListItem item = (PlaygroundSearchListItem) adapterView.getItemAtPosition(i);
+//        Intent intent = new Intent(this, .class);
+//        intent.putExtra("address", item.getLocation()); /* TODO - change addess with ID */
+//        startActivity(intent);
+        Toast.makeText(MainScreen.this, item.getLocation(), Toast.LENGTH_LONG).show();
     }
 
     private List<PlaygroundSearchListItem> getFavoritePlaygrounds(int count) {
