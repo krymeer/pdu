@@ -167,14 +167,14 @@ public class MainScreen extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Toast.makeText(this, "Profil clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, ProfileScreen.class);
+            startActivity(intent);
         } else if (id == R.id.nav_add_playground) {
             Toast.makeText(this, "Add clicked", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_delete_playground) {

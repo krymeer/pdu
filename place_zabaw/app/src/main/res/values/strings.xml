@@ -62,6 +62,11 @@
     <string name="marketing_content">Wyrażam zgode na przesyłanie treści marketingowych na podanych wyżej adres e-mail</string>
     <string name="error_password_not_identical">Hasła muszą być takie same!</string>
     <string name="prompt_repeat_password">Powtórz hasło</string>
+    <string name="profile_date">Użytkownik od: </string>
+    <string name="number_of_ratings">Liczba ocen: </string>
+    <string name="number_of_reports">Liczba zgłoszeń: </string>
+    <string name="title_activity_profile_screen">Twój profil</string>
+    <string name="user_name">Name und Vorname</string>
 
 
 </resources>
