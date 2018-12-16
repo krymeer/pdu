@@ -8,67 +8,15 @@
     tools:context=".MainScreen"
     tools:showIn="@layout/app_bar_main_screen" >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/your_playgrounds"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".18" />
-
     <ListView
-        android:id="@+id/favoritePlaygroundsList"
+        android:id="@+id/playgroundsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:divider="@color/colorBackground"
         android:dividerHeight="10dp" />
 
-    <Button
-        android:id="@+id/search_button"
-        style="?android:textAppearanceSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginTop="16dp"
-        android:background="#e00"
-        android:fontFamily="@font/roboto"
-        android:textStyle="bold"
-        android:textColor="#fff"
-        android:onClick="onSearchButtonClick"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:drawableStart="@android:drawable/ic_menu_search"
-        android:drawablePadding="20dp"
-        android:scaleType="fitStart"
-        android:adjustViewBounds="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/action_search"
-        android:paddingHorizontal="50dp"
-        />
-
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:src="@android:drawable/ic_menu_search"
-        android:layout_margin="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:visibility="gone"
-        />
 </RelativeLayout>
 
 

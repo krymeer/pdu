@@ -50,6 +50,7 @@
     <string name="confirm">Tak</string>
     <string name="cancel">Nie</string>
     <string name="click_to_add_functionalities">Kliknij, aby dodać funkcjonalności</string>
+    <string name="search_result_text">Wyniki wyszukiwania:</string>
 
 
 </resources>

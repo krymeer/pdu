@@ -1,11 +1,14 @@
 package czernik.osada.placezabaw;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
@@ -89,31 +92,52 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
 
     public void onSearchButtonClick(View view) {
         String address = addressText.getText().toString();
-        double priceFrom = 0;
-        double priceTo = 0;
-        double ratingFrom = Double.MIN_VALUE;
-        double ratingTo = Double.MAX_VALUE;
-        String functionalities = functionatitiesTextView.getText().toString();
 
-        if (!freeEntryCheckBox.isChecked()) {
-            if (TextUtils.isEmpty(priceFromText.getText().toString()))
-                priceFrom = Double.MIN_VALUE;
-            else priceFrom = Double.parseDouble(priceFromText.getText().toString());
-
-            if (TextUtils.isEmpty(priceToText.getText().toString()))
-                priceTo = Double.MAX_VALUE;
-            else priceTo = Double.parseDouble(priceToText.getText().toString());
+        if (TextUtils.isEmpty(address)) {
+            addressText.setError(getString(R.string.error_field_required));
+            addressText.requestFocus();
         }
+        else {
+            double priceFrom = 0;
+            double priceTo = 0;
+            double ratingFrom = Double.MIN_VALUE;
+            double ratingTo = Double.MAX_VALUE;
+            String functionalities = functionatitiesTextView.getText().toString();
 
-        if (!TextUtils.isEmpty(ratingFromText.getText().toString()))
-            ratingFrom = Double.parseDouble(ratingFromText.getText().toString());
-        if (!TextUtils.isEmpty(ratingToText.getText().toString()))
-            ratingTo = Double.parseDouble(ratingToText.getText().toString());
+            if (!freeEntryCheckBox.isChecked()) {
+                if (TextUtils.isEmpty(priceFromText.getText().toString()))
+                    priceFrom = Double.MIN_VALUE;
+                else priceFrom = Double.parseDouble(priceFromText.getText().toString());
 
+                if (TextUtils.isEmpty(priceToText.getText().toString()))
+                    priceTo = Double.MAX_VALUE;
+                else priceTo = Double.parseDouble(priceToText.getText().toString());
+            }
 
-        // TODO use these variables to search...
+            if (!TextUtils.isEmpty(ratingFromText.getText().toString()))
+                ratingFrom = Double.parseDouble(ratingFromText.getText().toString());
+            if (!TextUtils.isEmpty(ratingToText.getText().toString()))
+                ratingTo = Double.parseDouble(ratingToText.getText().toString());
 
-        Toast.makeText(this,"Search clicked", Toast.LENGTH_LONG).show();
+            if (functionalities == getString(R.string.prompt_functionalities)) functionalities = "";
+
+            Log.e("e", address);
+            Log.e("e", Double.toString(priceFrom));
+            Log.e("e", Double.toString(priceTo));
+            Log.e("e", Double.toString(ratingFrom));
+            Log.e("e", Double.toString(ratingTo));
+            Log.e("e", functionalities);
+
+            Intent backIntent = new Intent(this, MainScreen.class);
+            backIntent.putExtra("address", address);
+            backIntent.putExtra("priceFrom", priceFrom);
+            backIntent.putExtra("priceTo", priceTo);
+            backIntent.putExtra("ratingFrom", ratingFrom);
+            backIntent.putExtra("ratingTo", ratingTo);
+            backIntent.putExtra("functionalities", functionalities);
+            setResult(Activity.RESULT_OK, backIntent);
+            finish();
+        }
     }
 
     @Override
@@ -134,7 +158,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
         builder.setMessage("Wybierz:")
                 .setView(functionalitiesList)
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         String newText = "";
                         functionatitiesTextView.setText(newText);
@@ -147,10 +171,9 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
                         functionatitiesTextView.setText(newText);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(SearchScreen.this, "not ok", Toast.LENGTH_LONG).show();
-                        dialog.cancel();
+
                     }
                 }).show();
     }
