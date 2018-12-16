@@ -55,21 +55,23 @@ public class MainScreen extends AppCompatActivity
     private void initListHeaderText() {
         listHeaderText = new TextView(this);
         listHeaderText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        listHeaderText.setTextColor(getResources().getColor(R.color.colorAccent));
+        listHeaderText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         listHeaderText.setTextSize(32);
         listHeaderText.setTypeface(listHeaderText.getTypeface(), Typeface.BOLD);
+        listHeaderText.setPadding(0, 20, 0, 20);
     }
 
     private void initSearchButton() {
         searchButton = new Button(this);
-        searchButton.setText(R.string.action_search);
-        Drawable ico = getResources().getDrawable(android.R.drawable.ic_menu_search);
-        ico.setBounds(300, 0, 400, 100);
+        searchButton.setText(R.string.find_your_playground);
+        Drawable ico = getResources().getDrawable(R.drawable.playground_search);
+        ico.setBounds(250, 0, 350, 100);
         searchButton.setCompoundDrawables(ico, null, null, null);
         searchButton.setCompoundDrawablePadding(20);
-        searchButton.setBackgroundColor(Color.rgb(224, 0, 0));
+        searchButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         searchButton.setTextColor(Color.WHITE);
-        searchButton.setTypeface(searchButton.getTypeface(), Typeface.BOLD);
+        searchButton.setTextSize(20f);
+        searchButton.setAllCaps(false);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +125,7 @@ public class MainScreen extends AppCompatActivity
         //TODO add connection to DB
         List<PlaygroundSearchListItem> favorites  = new ArrayList<>(5);
         favorites.add(new PlaygroundSearchListItem("Wrocław, al. Kromera 67", "1,5 km", null, 4.5f));
-        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Nowowiesjka 5", "2,5 km", null, 3.5f));
+        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Nowowiejska 5", "2,5 km", null, 3.5f));
         favorites.add(new PlaygroundSearchListItem("Wrocław, pl. Grunwaldzki 103", "3,7 km", null, 1.5f));
         favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Kościuszki 67", "6,1 km", null, 2.0f));
         favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));

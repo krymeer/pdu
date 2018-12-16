@@ -9,7 +9,8 @@
     <string name="title_activity_search_screen">Wyszukaj</string>
 
     <!-- Main Screen -->
-    <string name="your_playgrounds">Ostatnio przeglądane</string>
+    <string name="your_playgrounds">Twoje place zabaw</string>
+    <string name="find_your_playground">Znajdź plac zabaw</string>
 
     <!-- Hamburger menu -->
     <string name="hamburger_menu_profile">Mój profil</string>
