@@ -10,15 +10,15 @@
             android:title="@string/hamburger_menu_profile" />
         <item
             android:id="@+id/nav_add_playground"
-            android:icon="@drawable/add_ico"
+            android:icon="@android:drawable/ic_menu_add"
             android:title="@string/hamburger_menu_add_playground" />
         <item
             android:id="@+id/nav_delete_playground"
-            android:icon="@drawable/remove_ico"
+            android:icon="@android:drawable/ic_menu_delete"
             android:title="@string/hamburger_menu_delete_playground" />
         <item
             android:id="@+id/nav_report"
-            android:icon="@drawable/report_ico"
+            android:icon="@android:drawable/stat_notify_error"
             android:title="@string/hamburger_menu_report" />
         <item
             android:id="@+id/nav_logout"

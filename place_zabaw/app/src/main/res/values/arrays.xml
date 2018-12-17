@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="playground_types_array">\
+        <item>Darmowy, ogólnodostępny</item>
+        <item>Płatny, ogólnodostępny</item>
+        <item>Płatny, potrzebna rezerwacja</item>
+    </string-array>
+</resources>

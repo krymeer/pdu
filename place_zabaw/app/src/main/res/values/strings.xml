@@ -68,6 +68,14 @@
     <string name="number_of_reports">Liczba zgłoszeń: </string>
     <string name="title_activity_profile_screen">Twój profil</string>
     <string name="user_name">Name und Vorname</string>
+    <string name="prompt_playground_address">Adres miejsca</string>
+    <string name="type">Typ</string>
+    <string name="prompt_price">Cena</string>
+    <string name="playground_description_input">Wprowadź opis placu zabaw</string>
+    <string name="playground_description_hint">Opis placu</string>
+    <string name="playground_functionalities_hint">Funkcjonalności</string>
+    <string name="action_add">Dodaj</string>
+    <string name="add_photo_hint">Dodaj zdjęcie</string>
 
 
 </resources>

@@ -178,7 +178,8 @@ public class MainScreen extends AppCompatActivity
             Intent intent = new Intent(this, ProfileScreen.class);
             startActivity(intent);
         } else if (id == R.id.nav_add_playground) {
-            Toast.makeText(this, "Add clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, AddPlaygroundScreen.class);
+            startActivity(intent);
         } else if (id == R.id.nav_delete_playground) {
             Toast.makeText(this, "Remove clicked", Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_report) {
