@@ -16,7 +16,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/title_activity_search_screen"
+        app:title="@string/title_activity_add_playground_screen"
         app:titleTextColor="#fff" >
 
     </android.support.v7.widget.Toolbar>
@@ -71,6 +71,7 @@
                     android:background="@color/colorPrimary"
                     android:padding="3dp"
                     android:scaleType="fitCenter"
+                    android:onClick="onLocationButtonClick"
                     android:src="@android:drawable/ic_menu_mylocation" />
             </RelativeLayout>
 

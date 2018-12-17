@@ -76,6 +76,8 @@
     <string name="playground_functionalities_hint">Funkcjonalności</string>
     <string name="action_add">Dodaj</string>
     <string name="add_photo_hint">Dodaj zdjęcie</string>
+    <string name="title_activity_add_playground_screen">Dodaj plac zabaw</string>
+    <string name="no_gps">GPS niedostępny</string>
 
 
 </resources>

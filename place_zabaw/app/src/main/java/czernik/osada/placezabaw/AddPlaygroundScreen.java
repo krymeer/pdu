@@ -1,10 +1,14 @@
 package czernik.osada.placezabaw;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -36,6 +40,8 @@ public class AddPlaygroundScreen extends AppCompatActivity {
     private EditText descriptionTextView;
     private TextView functionatitiesTextView;
     private LinearLayout gallery;
+    List<Bitmap> images;
+    private Locator locator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class AddPlaygroundScreen extends AppCompatActivity {
         priceTextView = (AutoCompleteTextView) findViewById(R.id.price_view);
         descriptionTextView = (EditText) findViewById(R.id.playground_description_edit_view);
         functionatitiesTextView = (TextView) findViewById(R.id.functionalities_text_view);
+        images = new ArrayList<>();
         gallery = (LinearLayout) findViewById(R.id.gallery);
 
         playgroundTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -78,6 +85,7 @@ public class AddPlaygroundScreen extends AppCompatActivity {
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                images.add(selectedImage);
                 ImageView newGalleryImageView = getNextImageView();
                 newGalleryImageView.setImageBitmap(selectedImage);
                 gallery.addView(newGalleryImageView);
@@ -92,7 +100,12 @@ public class AddPlaygroundScreen extends AppCompatActivity {
             Log.e("result", "else");
             Toast.makeText(AddPlaygroundScreen.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
         }
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     private void setToolbar() {
@@ -149,6 +162,16 @@ public class AddPlaygroundScreen extends AppCompatActivity {
 
     private void addPlayground() {
         Toast.makeText(this, "DODAJ PLAC ZABAW", Toast.LENGTH_LONG).show();
+
+        String address = addressTextView.getText().toString();
+        String type = playgroundTypeSpinner.getSelectedItem().toString();
+        Double price = 0.0;
+        if (TextUtils.isEmpty(priceTextView.getText().toString())) {
+            price = Double.parseDouble(priceTextView.getText().toString());
+        }
+        String description = descriptionTextView.getText().toString();
+        //images - list of bitmaps
+                
     }
 
     public void onAddPhotoClick(View view) {
@@ -167,5 +190,35 @@ public class AddPlaygroundScreen extends AppCompatActivity {
         imageView.setImageResource(R.drawable.ic_menu_gallery);
 
         return imageView;
+    }
+
+    public void onLocationButtonClick(View view) {
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        locator = new Locator(this, addressTextView);
+        Location location = locator.getLocation();
+        if (location != null) {
+            String newAddress = "Lat: " + Double.toString(location.getLatitude()) + "   Lat: " + Double.toString(location.getLatitude());
+            addressTextView.setText(newAddress);
+        } else {
+            Toast.makeText(this, R.string.no_gps, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }
