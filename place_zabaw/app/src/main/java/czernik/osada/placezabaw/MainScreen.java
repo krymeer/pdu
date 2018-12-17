@@ -62,10 +62,11 @@ public class MainScreen extends AppCompatActivity
     }
 
     private void initSearchButton() {
+        // IMHO the styling should be set in XML=
         searchButton = new Button(this);
         searchButton.setText(R.string.find_your_playground);
         Drawable ico = getResources().getDrawable(R.drawable.playground_search);
-        ico.setBounds(250, 0, 350, 100);
+        ico.setBounds(125, 0, 225, 100);
         searchButton.setCompoundDrawables(ico, null, null, null);
         searchButton.setCompoundDrawablePadding(20);
         searchButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
