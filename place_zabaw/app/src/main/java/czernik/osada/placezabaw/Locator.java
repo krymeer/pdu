@@ -1,6 +1,7 @@
 package czernik.osada.placezabaw;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -25,25 +26,31 @@ public class Locator implements LocationListener {
     private LocationManager mLocationManager;
     private TextView textView;
     private Context context;
+    private Activity activity;
 
-    public Locator(Context context, TextView textView) {
+    public Locator(Context context, Activity activity, TextView textView) {
         this.context = context;
+        this.activity = activity;
         this.textView = textView;
         mLocationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
     public Location getLocation() {
-        Log.e("location", "goIn");
+        //get permissions
+        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+        //if no permissions
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.e("location", "if1");
             return null;
         }
+
+        
         Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location != null && location.getTime() > Calendar.getInstance().getTimeInMillis() - 2 * 60 * 1000) {
             Log.e("location", "if2");
             // Do something with the recent location fix
             //  otherwise wait for the update below
-
+            setLocationInTextView(location);
             return location;
         }
         else {
@@ -53,12 +60,7 @@ public class Locator implements LocationListener {
         }
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        if (mLocationManager != null) {
-            mLocationManager.removeUpdates(this);
-
-        }
+    private void setLocationInTextView(Location location) {
         if (location != null) {
             Geocoder geocoder;
             List<Address> addresses = null;
@@ -81,6 +83,15 @@ public class Locator implements LocationListener {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (mLocationManager != null) {
+            mLocationManager.removeUpdates(this);
+
+        }
+        setLocationInTextView(location);
     }
 
     @Override

@@ -171,7 +171,7 @@ public class AddPlaygroundScreen extends AppCompatActivity {
         }
         String description = descriptionTextView.getText().toString();
         //images - list of bitmaps
-                
+
     }
 
     public void onAddPhotoClick(View view) {
@@ -193,15 +193,9 @@ public class AddPlaygroundScreen extends AppCompatActivity {
     }
 
     public void onLocationButtonClick(View view) {
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        locator = new Locator(this, addressTextView);
-        Location location = locator.getLocation();
-        if (location != null) {
-            String newAddress = "Lat: " + Double.toString(location.getLatitude()) + "   Lat: " + Double.toString(location.getLatitude());
-            addressTextView.setText(newAddress);
-        } else {
-            Toast.makeText(this, R.string.no_gps, Toast.LENGTH_LONG).show();
-        }
+        locator = new Locator(this, this, addressTextView);
+        locator.getLocation();
+
     }
 
     @Override
