@@ -56,6 +56,7 @@ public class AddPlaygroundScreen extends AppCompatActivity {
         functionatitiesTextView = (TextView) findViewById(R.id.functionalities_text_view);
         images = new ArrayList<>();
         gallery = (LinearLayout) findViewById(R.id.gallery);
+        locator = new Locator(this, this, addressTextView);
 
         playgroundTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -193,26 +194,7 @@ public class AddPlaygroundScreen extends AppCompatActivity {
     }
 
     public void onLocationButtonClick(View view) {
-        locator = new Locator(this, this, addressTextView);
         locator.getLocation();
-
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
-    }
 }

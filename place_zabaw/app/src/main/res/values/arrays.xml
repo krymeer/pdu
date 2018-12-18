@@ -5,4 +5,16 @@
         <item>Płatny, ogólnodostępny</item>
         <item>Płatny, potrzebna rezerwacja</item>
     </string-array>
+    <string-array name="report_reasons_array">
+        <item>Plac zabaw przeniesiony</item>
+        <item>Błąd w opisie placu zabaw</item>
+        <item>Niestosowny komentarz</item>
+        <item>Błąd w aplikacji</item>
+        <item>Inne</item>
+    </string-array>
+    <string-array name="delete_reasons_array">
+        <item>Plac zabaw zlikwidowany</item>
+        <item>Plac zabaw nie nigdy istniał</item>
+        <item>Inne</item>
+    </string-array>
 </resources>
