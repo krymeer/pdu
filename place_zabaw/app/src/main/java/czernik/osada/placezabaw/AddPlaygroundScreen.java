@@ -94,12 +94,12 @@ public class AddPlaygroundScreen extends AppCompatActivity {
             } catch (FileNotFoundException e) {
                 Log.e("result", "catch");
                 e.printStackTrace();
-                Toast.makeText(AddPlaygroundScreen.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddPlaygroundScreen.this, R.string.something_wrong, Toast.LENGTH_LONG).show();
             }
 
         }else {
             Log.e("result", "else");
-            Toast.makeText(AddPlaygroundScreen.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+            Toast.makeText(AddPlaygroundScreen.this,  R.string.no_image_picked,Toast.LENGTH_LONG).show();
         }
     }
 

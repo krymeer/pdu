@@ -43,7 +43,7 @@ public class DeleteScreen extends AppCompatActivity {
         setToolbar();
         addressTextView = (AutoCompleteTextView) findViewById(R.id.address);
         deleteReasonSpinner = (Spinner) findViewById(R.id.delete_reason_spinner);
-        descriptionTextView = (EditText) findViewById(R.id.delete_description_edit_view);
+        descriptionTextView = (EditText) findViewById(R.id.report_description_edit_view);
         images = new ArrayList<>();
         gallery = (LinearLayout) findViewById(R.id.gallery);
         locator = new Locator(this, this, addressTextView);
@@ -113,9 +113,7 @@ public class DeleteScreen extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            Log.e("result", "wchodze");
             try {
-                Log.e("result", "try");
                 final Uri imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
@@ -123,16 +121,13 @@ public class DeleteScreen extends AppCompatActivity {
                 ImageView newGalleryImageView = getNextImageView();
                 newGalleryImageView.setImageBitmap(selectedImage);
                 gallery.addView(newGalleryImageView);
-                Log.e("result", "try7");
             } catch (FileNotFoundException e) {
-                Log.e("result", "catch");
                 e.printStackTrace();
-                Toast.makeText(DeleteScreen.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                Toast.makeText(DeleteScreen.this, R.string.something_wrong, Toast.LENGTH_LONG).show();
             }
 
         }else {
-            Log.e("result", "else");
-            Toast.makeText(DeleteScreen.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+            Toast.makeText(DeleteScreen.this,  R.string.no_image_picked, Toast.LENGTH_LONG).show();
         }
     }
 
