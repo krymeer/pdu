@@ -35,6 +35,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
     private AutoCompleteTextView ratingFromText;
     private AutoCompleteTextView ratingToText;
     private TextView functionatitiesTextView;
+    private Locator locator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,5 +126,11 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
     {
         FunctionalitiesAlertDialogBuilder builder = new FunctionalitiesAlertDialogBuilder(this, functionatitiesTextView);
         builder.show();
+    }
+
+    public void onLocationButtonClick(View view) {
+        locator = new Locator(this, this, addressText);
+        locator.getLocation();
+
     }
 }

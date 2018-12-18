@@ -66,6 +66,7 @@
                     android:background="@color/colorPrimary"
                     android:padding="3dp"
                     android:scaleType="fitCenter"
+                    android:onClick="onLocationButtonClick"
                     android:src="@android:drawable/ic_menu_mylocation" />
             </RelativeLayout>
 

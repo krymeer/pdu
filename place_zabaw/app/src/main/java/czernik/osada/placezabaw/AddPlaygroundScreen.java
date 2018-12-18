@@ -162,13 +162,13 @@ public class AddPlaygroundScreen extends AppCompatActivity {
 
     private void addPlayground() {
         Toast.makeText(this, "DODAJ PLAC ZABAW", Toast.LENGTH_LONG).show();
-
         String address = addressTextView.getText().toString();
         String type = playgroundTypeSpinner.getSelectedItem().toString();
         Double price = 0.0;
-        if (TextUtils.isEmpty(priceTextView.getText().toString())) {
+        if (!TextUtils.isEmpty(priceTextView.getText().toString())) {
             price = Double.parseDouble(priceTextView.getText().toString());
         }
+        Log.e("send button", "5");
         String description = descriptionTextView.getText().toString();
         //images - list of bitmaps
 

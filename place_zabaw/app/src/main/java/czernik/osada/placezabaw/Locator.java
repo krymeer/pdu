@@ -44,7 +44,7 @@ public class Locator implements LocationListener {
             return null;
         }
 
-        
+
         Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location != null && location.getTime() > Calendar.getInstance().getTimeInMillis() - 2 * 60 * 1000) {
             Log.e("location", "if2");
