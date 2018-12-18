@@ -38,6 +38,7 @@ place_zabaw/captures/
 
 # IntelliJ
 *.iml
+place_zabaw/.idea/misc.xml
 place_zabaw/.idea/workspace.xml
 place_zabaw/.idea/tasks.xml
 place_zabaw/.idea/gradle.xml
