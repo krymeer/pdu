@@ -48,6 +48,7 @@
         <activity android:name=".AddPlaygroundActivity" />
         <activity android:name=".DeleteScreen" />
         <activity android:name=".ReportScreen"></activity>
+        <activity android:name=".CommentsScreen" />
     </application>
 
 </manifest>
