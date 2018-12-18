@@ -65,7 +65,7 @@ public class MainScreen extends AppCompatActivity
         // IMHO the styling should be set in XML=
         searchButton = new Button(this);
         searchButton.setText(R.string.find_your_playground);
-        Drawable ico = getResources().getDrawable(R.drawable.playground_search);
+        Drawable ico = getResources().getDrawable(R.drawable.ic_search);
         ico.setBounds(125, 0, 225, 100);
         searchButton.setCompoundDrawables(ico, null, null, null);
         searchButton.setCompoundDrawablePadding(20);
@@ -116,10 +116,13 @@ public class MainScreen extends AppCompatActivity
 
     private void onPlaygroundListItemClicked(AdapterView<?> adapterView, View view, int i, long l) {
         PlaygroundSearchListItem item = (PlaygroundSearchListItem) adapterView.getItemAtPosition(i);
-//        Intent intent = new Intent(this, .class);
-//        intent.putExtra("address", item.getLocation()); /* TODO - change addess with ID */
-//        startActivity(intent);
-        Toast.makeText(MainScreen.this, item.getLocation(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, PlaygroundDetailsScreen.class);
+        // Put test data
+        intent.putExtra("address", item.getLocation()); /* TODO - change address with ID */
+        intent.putExtra("distance", item.getDistance());
+        intent.putExtra("rating", item.getRating());
+        startActivity(intent);
+        //Toast.makeText(MainScreen.this, item.getLocation(), Toast.LENGTH_LONG).show();
     }
 
     private List<PlaygroundSearchListItem> getFavoritePlaygrounds(int count) {

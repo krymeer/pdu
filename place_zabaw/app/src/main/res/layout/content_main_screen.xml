@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainScreen"
-    tools:showIn="@layout/app_bar_main_screen" >
+    tools:showIn="@layout/app_bar_main_screen">
 
     <ListView
         android:id="@+id/playgroundsList"
@@ -16,8 +16,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:divider="@color/colorBackground"
-        android:dividerHeight="10dp" />
-
+        android:dividerHeight="10dp"
+        android:clipToPadding="false"
+        android:paddingBottom="10dp"/>
 </RelativeLayout>
 
 

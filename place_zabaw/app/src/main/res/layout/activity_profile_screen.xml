@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="@string/user_name"
             android:textSize="32sp"
-            android:textColor="#000"
+            android:textColor="@color/colorStandardText"
             android:textStyle="bold"
             android:layout_marginBottom="15dp"/>
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="@string/profile_date"
             android:textSize="24sp"
-            android:textColor="#000"
+            android:textColor="@color/colorStandardText"
             android:layout_marginBottom="5dp"/>
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="@string/number_of_ratings"
             android:textSize="24sp"
-            android:textColor="#000"
+            android:textColor="@color/colorStandardText"
             android:layout_marginBottom="5dp"/>
 
         <TextView
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="@string/number_of_reports"
             android:textSize="24sp"
-            android:textColor="#000" />
+            android:textColor="@color/colorStandardText" />
 
     </LinearLayout>
 
