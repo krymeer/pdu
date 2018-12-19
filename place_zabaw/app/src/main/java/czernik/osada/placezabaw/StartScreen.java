@@ -7,12 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import czernik.osada.placezabaw.database.PlaygroundsDataBase;
+
 public class StartScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
+
+        if (PlaygroundsDataBase.getInstance().isUserLogged()) {
+            Intent intent = new Intent(this, MainScreen.class);
+            startActivity(intent);
+        }
     }
 
     public void onLoginClick(View view) {

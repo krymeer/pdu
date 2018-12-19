@@ -1,14 +1,22 @@
 package czernik.osada.placezabaw;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import czernik.osada.placezabaw.CommentsListAdapter.*;
 
 public class PlaygroundCommentsScreen extends AppCompatActivity {
     ListView commentsListView;
+    TextView addressTextView;
+    String address;
 
     private List<CommentsListItem> getComments(int count) {
         List<CommentsListItem> comments  = new ArrayList<>();
@@ -20,9 +28,9 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
         comments.add(new CommentsListItem(5, "Romuald W.", "2018-08-19", 3.0f, "Consecteur adipiscing elit"));
         comments.add(new CommentsListItem(6, "Jakub O.", "2018-08-19", 5.0f, "Lorem ipsum dolor sit amet"));
 
+
         return comments;
     }
-
 
     private void initCommentList() {
 
@@ -32,11 +40,27 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
         commentsListView.setAdapter(commentsListAdapter);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playground_comments);
         initCommentList();
+
+        addressTextView = findViewById(R.id.playgroundComments_address);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null) {
+            if (intent.hasExtra("address")) {
+                address = bundle.getString("address");
+                addressTextView.setText(address);
+            }
+        }
+    }
+
+    public void onAddCommentBtnClick(View view) {
+        Intent intent = new Intent(this, AddCommentScreen.class);
+        intent.putExtra("address", address);
+        startActivity(intent);
     }
 }

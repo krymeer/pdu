@@ -172,6 +172,7 @@
             <TextView
                 app:layout_constraintTop_toBottomOf="@id/playgroundDetails_descriptionHeader"
                 android:paddingTop="5dp"
+                android:id="@+id/playgroundDetails_descriptionView"
                 android:paddingBottom="5dp"
                 android:textSize="14sp"
                 android:textColor="@color/colorStandardText"

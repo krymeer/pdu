@@ -33,6 +33,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import czernik.osada.placezabaw.database.PlaygroundTable;
+import czernik.osada.placezabaw.database.PlaygroundsDataBase;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
@@ -333,10 +336,11 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(Boolean success) {
             mAuthTask = null;
             showProgress(false);
 
+            success = PlaygroundsDataBase.getInstance().checkCredentials(mEmail, mPassword);
             if (success) {
                 Intent intent = new Intent(LoginScreen.this, MainScreen.class);
                 startActivity(intent);

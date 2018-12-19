@@ -1,5 +1,6 @@
 package czernik.osada.placezabaw;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -101,11 +102,14 @@ public class DeleteScreen extends AppCompatActivity {
     }
 
     private void removePlayground() {
-        Toast.makeText(this, "USUŃ PLAC ZABAW", Toast.LENGTH_LONG).show();
         String address = addressTextView.getText().toString();
         String type = deleteReasonSpinner.getSelectedItem().toString();
         String description = descriptionTextView.getText().toString();
         //images - list of bitmaps
+
+        Intent backIntent = new Intent(this, MainScreen.class);
+        setResult(Activity.RESULT_OK, backIntent);
+        finish();
     }
 
     @Override

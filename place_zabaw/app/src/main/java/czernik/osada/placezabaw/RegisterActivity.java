@@ -29,7 +29,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import czernik.osada.placezabaw.database.PlaygroundsDataBase;
 
 /**
  * A login screen that offers login via email/password.
@@ -188,7 +191,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserLoginTask(email, password, name);
             mAuthTask.execute((Void) null);
         }
     }
@@ -301,10 +304,12 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
         private final String mEmail;
         private final String mPassword;
+        private final String mName;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password, String name) {
             mEmail = email;
             mPassword = password;
+            mName = name;
         }
 
         @Override
@@ -336,6 +341,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             showProgress(false);
 
             if (success) {
+                PlaygroundsDataBase.getInstance().addUser(mEmail, mPassword, mName, new Date(), 0, 0);
                 Intent intent = new Intent(RegisterActivity.this, MainScreen.class);
                 startActivity(intent);
                 finish();

@@ -108,9 +108,13 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
             backIntent.putExtra("ratingFrom", ratingFrom);
             backIntent.putExtra("ratingTo", ratingTo);
             backIntent.putExtra("functionalities", functionalities);
+            Log.e("set result", "result");
             setResult(Activity.RESULT_OK, backIntent);
+            Log.e("set result", "result2");
             finish();
+            Log.e("set result", "result3");
         }
+        Log.e("set result", "result4");
     }
 
     @Override

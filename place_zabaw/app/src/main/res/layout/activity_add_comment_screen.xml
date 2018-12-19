@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".AddPlaygroundScreen"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".AddCommentScreen">
+
 
     <!-- toolbar -->
     <android.support.v7.widget.Toolbar
@@ -17,7 +19,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/title_activity_add_playground_screen"
+        app:title="@string/title_activity_report_playground_screen"
         app:titleTextColor="#fff" >
 
     </android.support.v7.widget.Toolbar>
@@ -40,105 +42,46 @@
                 android:layout_width="wrap_content"
                 android:text="@string/prompt_playground_address" />
 
-            <!-- Search field -->
-            <RelativeLayout
+
+            <TextView
+                android:id="@+id/addressTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
+                android:textSize="20sp"
+                android:text="Address"/>
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="302dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_playground_address"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/prompt_rating" />
 
-                </android.support.design.widget.TextInputLayout>
-
-                <ImageButton
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimary"
-                    android:padding="3dp"
-                    android:scaleType="fitCenter"
-                    android:onClick="onLocationButtonClick"
-                    android:src="@android:drawable/ic_menu_mylocation" />
-            </RelativeLayout>
-
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:rating="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
 
             <TextView
                 android:layout_height="fill_parent"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="@string/type" />
-
-            <Spinner
-                android:id="@+id/playground_type_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:entries="@array/playground_types_array"/>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <AutoCompleteTextView
-                    android:id="@+id/price_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_price"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:visibility="gone"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/playground_description_hint" />
+                android:text="@string/report_comment_hint" />
 
             <EditText
-                android:id="@+id/playground_description_edit_view"
+                android:id="@+id/report_comment_edit_view"
                 android:gravity="start"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:maxLines="4"
-                android:lines="4"
-                android:hint="@string/playground_description_input" />
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:maxLines="6"
+                android:lines="6"
+                android:hint="@string/report_comment_input" />
 
-
-            <TextView
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/playground_functionalities_hint" />
-
-            <TextView
-                android:id="@+id/functionalities_text_view"
-                android:gravity="start"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:maxLines="4"
-                android:lines="4"
-                android:textColor="@color/colorStandardText"
-                android:textSize="16sp"
-                android:textStyle="bold|italic"
-                android:onClick="onFunctionalitiesListClick"
-                android:layout_marginTop="24dp"
-                android:text="@string/click_to_add_functionalities" />
 
             <TextView
                 android:layout_height="fill_parent"
@@ -186,7 +129,7 @@
                 android:drawablePadding="20dp"
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true"
-                android:text="@string/action_add"
+                android:text="@string/action_add_comment"
                 android:textAlignment="center"
                 android:paddingHorizontal="50dp" />
 

@@ -7,7 +7,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,14 +26,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import czernik.osada.placezabaw.PlaygroundListAdapter.PlaygroundSearchListItem;
 import czernik.osada.placezabaw.PlaygroundListAdapter.PlaygroundsListAdapter;
+import czernik.osada.placezabaw.database.PlaygroundTable;
+import czernik.osada.placezabaw.database.PlaygroundsDataBase;
 
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int REQUEST_ADD = 2;
+    private static final int REQUEST_REPORT = 3;
+    private static final int REQUEST_DELETE = 4;
     private ListView playgroundsListView;
     private Toolbar toolbar;
     private Button searchButton;
@@ -117,17 +125,33 @@ public class MainScreen extends AppCompatActivity
     private void onPlaygroundListItemClicked(AdapterView<?> adapterView, View view, int i, long l) {
         PlaygroundSearchListItem item = (PlaygroundSearchListItem) adapterView.getItemAtPosition(i);
         Intent intent = new Intent(this, PlaygroundDetailsScreen.class);
-        // Put test data
-        intent.putExtra("address", item.getLocation()); /* TODO - change address with ID */
-        intent.putExtra("distance", item.getDistance());
-        intent.putExtra("rating", item.getRating());
-        startActivity(intent);
-        //Toast.makeText(MainScreen.this, item.getLocation(), Toast.LENGTH_LONG).show();
+        PlaygroundTable playgroundTable = PlaygroundsDataBase.getInstance().getPlayground(item.getLocation());
+        String func = "";
+        for (String f: playgroundTable.getFunctionalities()) {
+            func += f + ";";
+        }
+
+        if (playgroundTable != null) {
+            // Put test data
+            intent.putExtra("address", item.getLocation()); /* TODO - change address with ID */
+            intent.putExtra("distance", item.getDistance());
+            intent.putExtra("rating", item.getRating());
+            intent.putExtra("description", playgroundTable.getDescription());
+            intent.putExtra("functionalities", func);
+            startActivity(intent);
+        } else {
+            Toast.makeText(MainScreen.this, R.string.something_wrong, Toast.LENGTH_LONG).show();
+        }
     }
 
     private List<PlaygroundSearchListItem> getFavoritePlaygrounds(int count) {
         //TODO add connection to DB
         List<PlaygroundSearchListItem> favorites  = new ArrayList<>(5);
+        for (PlaygroundTable p: PlaygroundsDataBase.getInstance().getPlaygrounds()) {
+            PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getAddress(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
+            favorites.add(psli);
+        }
+        /*
         favorites.add(new PlaygroundSearchListItem("Wrocław, al. Kromera 67", "1,5 km", null, 4.5f));
         favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Nowowiejska 5", "2,5 km", null, 3.5f));
         favorites.add(new PlaygroundSearchListItem("Wrocław, pl. Grunwaldzki 103", "3,7 km", null, 1.5f));
@@ -135,7 +159,7 @@ public class MainScreen extends AppCompatActivity
         favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
         favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
         favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
-
+        */
         return favorites;
     }
 
@@ -166,7 +190,7 @@ public class MainScreen extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             Intent intent = new Intent(this, SearchScreen.class);
-            startActivity(intent);
+            startActivityForResult(intent, 1);
             return true;
         }
 
@@ -183,13 +207,13 @@ public class MainScreen extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_add_playground) {
             Intent intent = new Intent(this, AddPlaygroundScreen.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_ADD);
         } else if (id == R.id.nav_delete_playground) {
             Intent intent = new Intent(this, DeleteScreen.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_DELETE);
         } else if (id == R.id.nav_report) {
             Intent intent = new Intent(this, ReportScreen.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_REPORT);
         } else if (id == R.id.nav_logout) {
             logOut();
         }
@@ -207,6 +231,7 @@ public class MainScreen extends AppCompatActivity
         adb.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(MainScreen.this, StartScreen.class);
+                PlaygroundsDataBase.getInstance().logOutUser();
                 startActivity(intent);
             } });
 
@@ -232,7 +257,6 @@ public class MainScreen extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(this, "BACK TO MAIN", Toast.LENGTH_LONG).show();
         if (requestCode == 1) {
             //TODO add connection to DB
             if(resultCode == Activity.RESULT_OK){
@@ -243,11 +267,28 @@ public class MainScreen extends AppCompatActivity
                 double ratingFrom = data.getDoubleExtra("ratingFrom", 0);
                 double ratingTo = data.getDoubleExtra("ratingTo", 5);
                 String functionalities = data.getStringExtra("address");
-                Toast.makeText(this, "RESULT_OK", Toast.LENGTH_LONG).show();
+                List<String> func = new ArrayList<>(Arrays.asList(functionalities.split(";")));
+
+                Log.e("func", func.toString());
+                List<PlaygroundTable> playgrounds = PlaygroundsDataBase.getInstance().getPlaygrounds(priceFrom, priceTo, ratingFrom, ratingTo, func);
+
+                List<PlaygroundSearchListItem> searchResultItems  = new ArrayList<>();
+                for (PlaygroundTable p: playgrounds) {
+                    PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getAddress(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
+                    searchResultItems.add(psli);
+                }
+
+                PlaygroundsListAdapter playgroundsListAdapter = new PlaygroundsListAdapter(this, searchResultItems);
+                playgroundsListView.setAdapter(playgroundsListAdapter);
+
             }
             if (resultCode == Activity.RESULT_CANCELED) {
+                Log.e("func", "cancel");
                 Toast.makeText(this, "RESULT_CANCELED", Toast.LENGTH_LONG).show();
             }
+        }
+        if (requestCode == REQUEST_ADD || requestCode == REQUEST_DELETE || requestCode == REQUEST_REPORT) {
+            Snackbar.make(findViewById(android.R.id.content), R.string.request_sent,Snackbar.LENGTH_LONG).show();
         }
     }
 }

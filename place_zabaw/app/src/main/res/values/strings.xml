@@ -101,5 +101,10 @@
     <string name="no_image_picked">Nie wybrano żadnego zdjęcia</string>
     <string name="something_wrong">Coś poszło nie tak</string>
     <string name="action_report">Zgłoś</string>
+    <string name="prompt_rating">Ocena</string>
+    <string name="report_comment_hint">Komentarz</string>
+    <string name="report_comment_input">Tutaj wpisz swoją opinię</string>
+    <string name="action_add_comment">Oceń</string>
+    <string name="request_sent">Twoje zgłoszenie zostało wysłane. Zostanie rozpatrzone przez administratora tak szybko, jak to możliwe.</string>
 
 </resources>

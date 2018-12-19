@@ -1,6 +1,7 @@
 package czernik.osada.placezabaw;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -162,7 +163,6 @@ public class AddPlaygroundScreen extends AppCompatActivity {
     }
 
     private void addPlayground() {
-        Toast.makeText(this, "DODAJ PLAC ZABAW", Toast.LENGTH_LONG).show();
         String address = addressTextView.getText().toString();
         String type = playgroundTypeSpinner.getSelectedItem().toString();
         Double price = 0.0;
@@ -172,6 +172,10 @@ public class AddPlaygroundScreen extends AppCompatActivity {
         Log.e("send button", "5");
         String description = descriptionTextView.getText().toString();
         //images - list of bitmaps
+
+        Intent backIntent = new Intent(this, MainScreen.class);
+        setResult(Activity.RESULT_OK, backIntent);
+        finish();
 
     }
 

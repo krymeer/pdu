@@ -1,5 +1,6 @@
 package czernik.osada.placezabaw;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -68,6 +69,14 @@ public class ReportScreen extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            if (intent.hasExtra("address")) {
+                addressTextView.setText(intent.getStringExtra("address"));
+            }
+        }
 
     }
 
@@ -150,7 +159,10 @@ public class ReportScreen extends AppCompatActivity {
 
 
     private void sendReport() {
-        Toast.makeText(this, "REPORT PROBLEM", Toast.LENGTH_LONG).show();
+        Intent backIntent = new Intent(this, MainScreen.class);
+        setResult(Activity.RESULT_OK, backIntent);
+        finish();
+
     }
 
     public void onAddPhotoClick(View view) {

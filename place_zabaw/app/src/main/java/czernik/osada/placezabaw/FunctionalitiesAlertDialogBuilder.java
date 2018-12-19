@@ -70,8 +70,9 @@ public class FunctionalitiesAlertDialogBuilder extends AlertDialog.Builder {
         functionalities.add("Pająk");
         functionalities.add("Piaskownica");
         functionalities.add("Drabinki");
-        functionalities.add("Toaleta");
         functionalities.add("Karuzela");
+        functionalities.add("Trampolina");
+        functionalities.add("Toaleta");
         return functionalities;
     }
 }

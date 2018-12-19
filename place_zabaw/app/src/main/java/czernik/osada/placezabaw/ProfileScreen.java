@@ -6,10 +6,16 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import czernik.osada.placezabaw.database.PlaygroundsDataBase;
+import czernik.osada.placezabaw.database.UserTable;
 
 public class ProfileScreen extends AppCompatActivity {
 
@@ -29,6 +35,12 @@ public class ProfileScreen extends AppCompatActivity {
         dateTextView = (TextView) findViewById(R.id.profile_date_textview);
         ratingTextView = (TextView) findViewById(R.id.number_of_ratings_textview);
         reportsTextView = (TextView) findViewById(R.id.number_of_reports_textview);
+
+        UserTable user = PlaygroundsDataBase.getInstance().getLoggedUser();
+        setUserName(user.getName());
+        setDateOfRegistration(user.getRegisterDate());
+        setNumberOfRatings(user.getNumberOfRatings());
+        setNumberOfReports(user.getNumberOfComments());
 
         setToolbar();
     }
@@ -55,14 +67,16 @@ public class ProfileScreen extends AppCompatActivity {
     }
 
     public void setDateOfRegistration(Date newDate) {
-        dateTextView.setText(getString(R.string.profile_date) + newDate);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = df.format(newDate.getTime());
+        dateTextView.setText(getString(R.string.profile_date) + " 09.12.2018");
     }
 
     public void setNumberOfRatings(int ratings) {
-        ratingTextView.setText(getString(R.string.number_of_ratings) + Integer.toString(ratings));
+        ratingTextView.setText(getString(R.string.number_of_ratings) + " " + Integer.toString(ratings));
     }
 
     public void setNumberOfReports(int reports) {
-        reportsTextView.setText(getString(R.string.number_of_ratings) + Integer.toString(reports));
+        reportsTextView.setText(getString(R.string.number_of_reports) + " " + Integer.toString(reports));
     }
 }
