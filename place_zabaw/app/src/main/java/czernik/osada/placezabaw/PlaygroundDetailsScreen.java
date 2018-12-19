@@ -47,7 +47,7 @@ public class PlaygroundDetailsScreen extends AppCompatActivity{
 
     public void onRateBtnClick(View view)
     {
-        Intent intent = new Intent(this, CommentsScreen.class);
+        Intent intent = new Intent(this, PlaygroundCommentsScreen.class);
         intent.putExtra("rating", this.rating);
         startActivity(intent);
     }

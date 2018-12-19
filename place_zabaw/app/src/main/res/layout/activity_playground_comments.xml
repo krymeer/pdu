@@ -1,0 +1,87 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/playgroundDetails_header"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/ic_photo"
+            android:id="@+id/playgroundDetails_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+        <ImageView
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_share"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <!--<ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playgroundDetails_header">-->
+        <android.support.constraint.ConstraintLayout
+            app:layout_constraintTop_toBottomOf="@id/playgroundDetails_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/playgroundComments_address"
+                android:text="Adres placu zabaw"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="32sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ListView
+                android:layout_marginLeft="10dp"
+                android:divider="@color/colorBackground"
+                android:dividerHeight="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/playgroundComments_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/playgroundComments_address"
+                />
+
+            <Button
+                android:id="@+id/playgroundComments_addCommentBtn"
+                app:layout_constraintTop_toBottomOf="@id/playgroundComments_list"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                android:drawableStart="@drawable/ic_add"
+                android:drawablePadding="5dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:background="@color/colorAccent"
+                android:fontFamily="@font/roboto"
+                android:text="@string/add_comment"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="18sp"
+                android:onClick="onAddCommentBtnClick"
+                />
+        </android.support.constraint.ConstraintLayout>
+    <!--</ScrollView>-->
+</android.support.constraint.ConstraintLayout>
