@@ -58,9 +58,11 @@ public class PlaygroundsListAdapter extends BaseAdapter {
         RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 
+        String distance = currentItem.getDistance() + " km";
+
         //sets the text for item name and item description from the current item object
         locationTextView.setText(currentItem.getLocation());
-        distanceTextView.setText(currentItem.getDistance());
+        distanceTextView.setText(distance);
         ratingBar.setRating(currentItem.getRating());
         if (currentItem.getMiniature() != null) {
             imageView.setImageBitmap(currentItem.getMiniature());
