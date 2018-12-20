@@ -1,5 +1,6 @@
 package czernik.osada.placezabaw;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -105,6 +106,8 @@ public class AddCommentScreen extends AppCompatActivity {
     }
 
     public void onSendButtonClick(View view) {
-        Toast.makeText(this, "OCEN", Toast.LENGTH_LONG).show();
+        Intent backIntent = new Intent(this, PlaygroundCommentsScreen.class);
+        setResult(Activity.RESULT_OK, backIntent);
+        finish();
     }
 }
