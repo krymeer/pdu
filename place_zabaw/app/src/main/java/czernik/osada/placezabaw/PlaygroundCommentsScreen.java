@@ -1,7 +1,9 @@
 package czernik.osada.placezabaw;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +21,7 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
     String address;
 
     private List<CommentsListItem> getComments(int count) {
-        List<CommentsListItem> comments  = new ArrayList<>();
+        List<CommentsListItem> comments = new ArrayList<>();
         comments.add(new CommentsListItem(0, "Grażyna W.", "2018-12-19", 0.5f, "Lorem ipsum dolor sit amet"));
         comments.add(new CommentsListItem(1, "Adam M.", "2018-11-19", 2.5f, "Consecteur adipiscing elit"));
         comments.add(new CommentsListItem(2, "Krzysztof O.", "2018-10-19", 4.5f, "Lorem ipsum dolor sit amet"));
@@ -61,6 +63,13 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
     public void onAddCommentBtnClick(View view) {
         Intent intent = new Intent(this, AddCommentScreen.class);
         intent.putExtra("address", address);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Snackbar.make(findViewById(android.R.id.content), R.string.request_sent, Snackbar.LENGTH_LONG).show();
+        }
     }
 }

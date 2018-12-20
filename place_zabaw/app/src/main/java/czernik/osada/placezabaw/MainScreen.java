@@ -282,13 +282,11 @@ public class MainScreen extends AppCompatActivity
                 playgroundsListView.setAdapter(playgroundsListAdapter);
 
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                Log.e("func", "cancel");
-                Toast.makeText(this, "RESULT_CANCELED", Toast.LENGTH_LONG).show();
-            }
         }
         if (requestCode == REQUEST_ADD || requestCode == REQUEST_DELETE || requestCode == REQUEST_REPORT) {
-            Snackbar.make(findViewById(android.R.id.content), R.string.request_sent,Snackbar.LENGTH_LONG).show();
+            if (resultCode == Activity.RESULT_OK) {
+                Snackbar.make(findViewById(android.R.id.content), R.string.request_sent,Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 }

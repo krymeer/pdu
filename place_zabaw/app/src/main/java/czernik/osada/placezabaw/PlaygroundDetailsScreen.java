@@ -1,5 +1,6 @@
 package czernik.osada.placezabaw;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -90,6 +91,8 @@ public class PlaygroundDetailsScreen extends AppCompatActivity{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Snackbar.make(findViewById(android.R.id.content), R.string.request_sent,Snackbar.LENGTH_LONG).show();
+        if (resultCode == Activity.RESULT_OK) {
+            Snackbar.make(findViewById(android.R.id.content), R.string.request_sent, Snackbar.LENGTH_LONG).show();
+        }
     }
 }

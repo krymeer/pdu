@@ -19,7 +19,7 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="@string/title_activity_report_playground_screen"
+        app:title="@string/title_activity_add_comment_playground_screen"
         app:titleTextColor="#fff" >
 
     </android.support.v7.widget.Toolbar>

@@ -1,5 +1,6 @@
 package czernik.osada.placezabaw;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +8,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -45,6 +47,17 @@ public class AddCommentScreen extends AppCompatActivity {
                 addressTextView.setText(address);
             }
         }
+
+        setToolbar();
+    }
+
+
+    private void setToolbar() {
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     public void onAddPhotoClick(View view) {
@@ -93,6 +106,8 @@ public class AddCommentScreen extends AppCompatActivity {
     }
 
     public void onSendButtonClick(View view) {
-        Toast.makeText(this, "OCEN", Toast.LENGTH_LONG).show();
+        Intent backIntent = new Intent(this, PlaygroundCommentsScreen.class);
+        setResult(Activity.RESULT_OK, backIntent);
+        finish();
     }
 }
