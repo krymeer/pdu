@@ -106,5 +106,6 @@
     <string name="report_comment_input">Tutaj wpisz swoją opinię</string>
     <string name="action_add_comment">Oceń</string>
     <string name="request_sent">Twoje zgłoszenie zostało wysłane. Zostanie rozpatrzone przez administratora tak szybko, jak to możliwe.</string>
+    <string name="title_activity_add_comment_playground_screen">Oceń</string>
 
 </resources>
