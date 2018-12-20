@@ -32,7 +32,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/app_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/permanent_marker"
+                android:text="@string/app_name"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
             <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -48,6 +60,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -66,18 +79,18 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                android:layout_marginTop="20dp"
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimary"
                 android:fontFamily="@font/roboto"
-                android:drawableStart="@android:drawable/ic_menu_send"
-                android:text="@string/action_sign_in_short"
+                android:text="@string/log_in"
+                android:textAllCaps="false"
+                android:textSize="25sp"
                 android:textColor="#fff"
-                android:textStyle="bold"
                 />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
