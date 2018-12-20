@@ -39,7 +39,7 @@ public class PlaygroundDetailsScreen extends AppCompatActivity{
 
             if (intent.hasExtra("distance"))
             {
-                distance = bundle.getString("distance");
+                distance = bundle.getString("distance") + " km";
                 distanceTextView.setText(distance);
             }
 
@@ -48,11 +48,13 @@ public class PlaygroundDetailsScreen extends AppCompatActivity{
                 this.rating = bundle.getFloat("rating");
                 ratingBar.setRating(this.rating);
             }
+
             if (intent.hasExtra("description"))
             {
                 this.description = bundle.getString("description");
                 playgroundDetailsDescriptionTextView.setText(description);
             }
+
             if (intent.hasExtra("functionalities"))
             {
                 this.functionalities =  bundle.getString("functionalities");
