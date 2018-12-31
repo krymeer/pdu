@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
     TextView addressTextView;
     String address;
 
-    private List<CommentsListItem> getComments(int count) {
+    private List<CommentsListItem> getComments() {
         List<CommentsListItem> comments = new ArrayList<>();
         comments.add(new CommentsListItem(0, "Grażyna W.", "2018-12-19", 0.5f, "Lorem ipsum dolor sit amet"));
         comments.add(new CommentsListItem(1, "Adam M.", "2018-11-19", 2.5f, "Consecteur adipiscing elit"));
@@ -29,17 +27,17 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
         comments.add(new CommentsListItem(4, "Bronisław K.", "2018-08-19", 5.0f, "Lorem ipsum dolor sit amet"));
         comments.add(new CommentsListItem(5, "Romuald W.", "2018-08-19", 3.0f, "Consecteur adipiscing elit"));
         comments.add(new CommentsListItem(6, "Jakub O.", "2018-08-19", 5.0f, "Lorem ipsum dolor sit amet"));
-
-
         return comments;
     }
 
     private void initCommentList() {
-
-        List<CommentsListItem> itemsList = getComments(5);
+        List<CommentsListItem> itemsList        = getComments();
         CommentsListAdapter commentsListAdapter = new CommentsListAdapter(this, itemsList);
-        commentsListView = findViewById(R.id.playgroundComments_list);
+        commentsListView                        = findViewById(R.id.playgroundComments_list);
+        View buttonView                         = View.inflate(this, R.layout.button_add_comment, null);
+
         commentsListView.setAdapter(commentsListAdapter);
+        commentsListView.addFooterView(buttonView);
     }
 
     @Override

@@ -107,5 +107,10 @@
     <string name="action_add_comment">Oceń</string>
     <string name="request_sent">Twoje zgłoszenie zostało wysłane. Zostanie rozpatrzone przez administratora tak szybko, jak to możliwe.</string>
     <string name="title_activity_add_comment_playground_screen">Oceń</string>
+    <string name="ic_search">Ikona lupy</string>
+    <string name="ic_add">Dodaj</string>
+    <string name="ic_photo">Zdjęcie</string>
+    <string name="ic_share">Udostępnij</string>
+    <string name="playground_address_default">Adres placu zabaw</string>
 
 </resources>

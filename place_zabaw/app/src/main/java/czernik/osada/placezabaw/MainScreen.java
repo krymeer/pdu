@@ -3,9 +3,7 @@ package czernik.osada.placezabaw;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -20,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +39,6 @@ public class MainScreen extends AppCompatActivity
     private static final int REQUEST_DELETE = 4;
     private ListView playgroundsListView;
     private Toolbar toolbar;
-    private Button searchButton;
     private TextView listHeaderText;
 
 
@@ -54,7 +50,6 @@ public class MainScreen extends AppCompatActivity
         initToolbar();
         initHamburgetMenu();
         initListHeaderText();
-        initSearchButton();
         initPlaygroundList();
 
         listHeaderText.setText(R.string.your_playgrounds);
@@ -69,57 +64,38 @@ public class MainScreen extends AppCompatActivity
         listHeaderText.setPadding(0, 20, 0, 20);
     }
 
-    private void initSearchButton() {
-        // IMHO the styling should be set in XML=
-        searchButton = new Button(this);
-        searchButton.setText(R.string.find_your_playground);
-        Drawable ico = getResources().getDrawable(R.drawable.ic_search);
-        ico.setBounds(125, 0, 225, 100);
-        searchButton.setCompoundDrawables(ico, null, null, null);
-        searchButton.setCompoundDrawablePadding(20);
-        searchButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        searchButton.setTextColor(Color.WHITE);
-        searchButton.setTextSize(20f);
-        searchButton.setAllCaps(false);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSearchButtonClick(view);
-            }
-        });
-    }
-
     private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
     private void initHamburgetMenu() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void initPlaygroundList() {
-        List<PlaygroundSearchListItem> itemsList = getFavoritePlaygrounds(5);
+        List<PlaygroundSearchListItem> itemsList        = getFavoritePlaygrounds(5);
+        PlaygroundsListAdapter playgroundsListAdapter   = new PlaygroundsListAdapter(this, itemsList);
+        View buttonView                                 = View.inflate(this, R.layout.button_search, null);
+        playgroundsListView                             = findViewById(R.id.playgroundsList);
 
-        PlaygroundsListAdapter playgroundsListAdapter = new PlaygroundsListAdapter(this, itemsList);
-        playgroundsListView = (ListView) findViewById(R.id.playgroundsList);
         playgroundsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 onPlaygroundListItemClicked(adapterView, view, i, l);
             }
         });
-        playgroundsListView.setAdapter(playgroundsListAdapter);
 
+        playgroundsListView.setAdapter(playgroundsListAdapter);
         playgroundsListView.addHeaderView(listHeaderText);
-        playgroundsListView.addFooterView(searchButton);
+        playgroundsListView.addFooterView(buttonView);
     }
 
     private void onPlaygroundListItemClicked(AdapterView<?> adapterView, View view, int i, long l) {

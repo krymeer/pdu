@@ -10,7 +10,7 @@ Jeśli coś nie działa, pamiętaj: _It's not a bug, it's a feature_.
 * Funkcjonalności w postaci ikon (?).
 * Układ ekranu ocen (przycisk na końcu listy rozwijanej).
 * Zdjęcia placów zabaw.
-* Wygląd ekranu dodawania oceny.
+* Wygląd **elementów** ekranu dodawania oceny (tzn. poszczególne komentarze.
 * Wygląd ekranu dodawania placu zabaw.
 * Wygląd ekranu usuwania placu zabaw.
 * Wygląd ekranu zgłaszania błędu.
@@ -22,3 +22,4 @@ Jeśli coś nie działa, pamiętaj: _It's not a bug, it's a feature_.
 * Demo aplikacji.
 * Wyszukiwanie placu zabaw po nazwie.
 * Wygląd komunikatów o błędzie.
+* Odległość od placu zabaw ustalona na podstawie GPS.
