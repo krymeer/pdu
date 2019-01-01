@@ -70,11 +70,29 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView                  = findViewById(R.id.email);
+        mPasswordView               = findViewById(R.id.password);
+        mLoginFormView              = findViewById(R.id.login_form);
+        mProgressView               = findViewById(R.id.login_progress);
+        Button mEmailSignInButton   = findViewById(R.id.login_button);
+        Intent intent               = getIntent();
+        Bundle bundle               = intent.getExtras();
+
         //populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        if (bundle != null)
+        {
+            if (intent.hasExtra("autoLogin") && bundle.getBoolean("autoLogin"))
+            {
+                String[] credentials = PlaygroundsDataBase.getInstance().getDummyCredentials();
+                showProgress(true);
+                mAuthTask = new UserLoginTask(credentials[0], credentials[1]);
+                mAuthTask.execute((Void) null);
+            }
+        }
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -86,16 +104,12 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
     }
 
     private void populateAutoComplete() {

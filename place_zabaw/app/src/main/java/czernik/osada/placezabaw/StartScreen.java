@@ -27,13 +27,19 @@ public class StartScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onBuildButtonClick(View view) {
+        Intent intent = new Intent(this, LoginScreen.class);
+        intent.putExtra("autoLogin", true);
+        startActivity(intent);
+    }
+
     public void onRegisterClick(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

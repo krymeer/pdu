@@ -22,7 +22,7 @@
     <string name="drawer_close">Close navigation drawer</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Hasło</string>
     <string name="action_sign_in">Zaloguj się lub zarejestruj</string>
     <string name="action_sign_in_short">Zaloguj</string>
@@ -107,10 +107,13 @@
     <string name="action_add_comment">Oceń</string>
     <string name="request_sent">Twoje zgłoszenie zostało wysłane. Zostanie rozpatrzone przez administratora tak szybko, jak to możliwe.</string>
     <string name="title_activity_add_comment_playground_screen">Oceń</string>
-    <string name="ic_search">Ikona lupy</string>
-    <string name="ic_add">Dodaj</string>
-    <string name="ic_photo">Zdjęcie</string>
-    <string name="ic_share">Udostępnij</string>
+
     <string name="playground_address_default">Adres placu zabaw</string>
+
+    <!-- Content description -->
+    <string name="ic_search">Ikona lupy</string>
+    <string name="ic_add">Ikona dodawania</string>
+    <string name="ic_photo">Ikona zdjęcia</string>
+    <string name="ic_share">Ikona udostępnienia</string>
 
 </resources>

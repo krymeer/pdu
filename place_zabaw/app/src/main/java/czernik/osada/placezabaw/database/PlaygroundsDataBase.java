@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class PlaygroundsDataBase {
+    private static final String[] DUMMY_CREDENTIALS = new String[]{"a@a.pl", "12345"};
     private static final PlaygroundsDataBase ourInstance = new PlaygroundsDataBase();
 
     private List<PlaygroundTable> playgrounds;
@@ -47,7 +48,7 @@ public class PlaygroundsDataBase {
 
     private List<UserTable> initUsers() {
         /* UserTable(String email, String password, Date registerDate, int numberOfComments, int numberOfRatings) */
-        UserTable u1 = new UserTable("a@a.pl", "12345", "Jan Kowalski", new Date(1544389935), 3, 5);
+        UserTable u1 = new UserTable(DUMMY_CREDENTIALS[0], DUMMY_CREDENTIALS[1], "Jan Kowalski", new Date(1544389935), 3, 5);
 
         List<UserTable> users = new ArrayList<>();
         users.add(u1);
@@ -62,6 +63,10 @@ public class PlaygroundsDataBase {
 
     public void logOutUser() {
         loggedUser = null;
+    }
+
+    public String[] getDummyCredentials() {
+        return DUMMY_CREDENTIALS;
     }
 
     public UserTable getLoggedUser() {
