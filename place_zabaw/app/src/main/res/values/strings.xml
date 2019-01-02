@@ -86,6 +86,13 @@
     <string name="features">Funkcjonalności</string>
     <string name="description">Opis</string>
     <string name="add_comment">Dodaj komentarz</string>
+    <string name="features_default">tu będzie lista funkcjonalności...</string>
+
+    <!-- Content description -->
+    <string name="ic_search">Ikona lupy</string>
+    <string name="ic_add">Ikona dodawania</string>
+    <string name="ic_photo">Ikona zdjęcia</string>
+    <string name="ic_share">Ikona udostępnienia</string>
 
     <!-- Miscellanous strings -->
     <string name="lipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec risus erat. Quisque sit amet libero sed ex luctus suscipit. Sed at turpis maximus, efficitur orci eu, tempor sem. Vestibulum suscipit lectus ac mauris tincidunt dictum. Mauris vitae ligula tristique purus commodo porta in eu magna. Duis vestibulum tellus eu enim euismod gravida. Praesent ornare risus sed luctus semper. Suspendisse tincidunt, nibh facilisis porttitor tempor, purus elit aliquam sapien, in rutrum nulla eros et massa. Nullam ut auctor quam, a cursus sapien. Donec eu euismod orci, et elementum nisl. Aenean scelerisque bibendum ex sit amet volutpat. Vivamus pellentesque hendrerit lorem ut auctor. Maecenas tristique eros vel ornare volutpat. Fusce et massa ullamcorper, egestas neque eu, tincidunt risus. Donec cursus urna sit amet vulputate rhoncus. Nulla mi ex, mattis ut consectetur at, aliquam vel velit.\n\nCurabitur fringilla purus sit amet arcu maximus, at volutpat neque pulvinar. Mauris feugiat in tellus quis fermentum. Pellentesque volutpat turpis sed pretium bibendum. Donec viverra volutpat purus ut pulvinar. Sed est eros, rhoncus et sapien id, eleifend tempor lacus. Donec sagittis ex ut fermentum condimentum. Suspendisse pellentesque sem sodales neque pellentesque lobortis. In tempor turpis nec risus ultricies, porta eleifend eros posuere. Morbi egestas, magna et aliquet consequat, sem ipsum pulvinar urna, tristique ultricies sapien elit vel tortor. Donec ornare elementum quam, ut convallis est interdum at. Aenean quis lacus diam. Etiam nisl mauris, lacinia sit amet aliquet eget, facilisis vitae ante. Sed aliquet, risus at gravida semper, dui dui blandit enim, eu viverra elit arcu at ligula. Aenean et diam ligula. Cras quis ex dictum, viverra ligula efficitur, bibendum massa. Nulla cursus non arcu quis pellentesque.\n\nNunc in nunc dapibus, auctor justo sit amet, elementum risus. Morbi hendrerit nunc neque, eu malesuada est vulputate vel. Pellentesque erat quam, ullamcorper ac pretium vel, mattis quis mi. Vivamus sagittis posuere justo eget accumsan. Vivamus vitae nibh ut sapien sollicitudin ullamcorper. Aliquam viverra eros dui, eget iaculis erat finibus sed. Aenean nisl nisi, efficitur sed convallis quis, molestie sed mi. Nullam in porta felis. Nullam ac turpis feugiat quam elementum accumsan nec eget mi.</string>
@@ -107,13 +114,9 @@
     <string name="action_add_comment">Oceń</string>
     <string name="request_sent">Twoje zgłoszenie zostało wysłane. Zostanie rozpatrzone przez administratora tak szybko, jak to możliwe.</string>
     <string name="title_activity_add_comment_playground_screen">Oceń</string>
-
     <string name="playground_address_default">Adres placu zabaw</string>
-
-    <!-- Content description -->
-    <string name="ic_search">Ikona lupy</string>
-    <string name="ic_add">Ikona dodawania</string>
-    <string name="ic_photo">Ikona zdjęcia</string>
-    <string name="ic_share">Ikona udostępnienia</string>
+    <string name="playground_street_default">Nazwa ulicy i numer</string>
+    <string name="playground_town_default">Miejscowość</string>
+    <string name="distance_default">- km</string>
 
 </resources>

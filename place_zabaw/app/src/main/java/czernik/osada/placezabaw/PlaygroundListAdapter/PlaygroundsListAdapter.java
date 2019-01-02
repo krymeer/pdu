@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import czernik.osada.placezabaw.R;
@@ -43,34 +42,30 @@ public class PlaygroundsListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        // inflate the layout for each list row
-        if (view == null) {
-            view = LayoutInflater.from(context).
-                    inflate(R.layout.playground_search_item, viewGroup, false);
+        if (view == null)
+        {
+            view = LayoutInflater.from(context).inflate(R.layout.playground_search_item, viewGroup, false);
         }
 
-        // get current item to be displayed
-        PlaygroundSearchListItem currentItem = (PlaygroundSearchListItem) getItem(i);
+        PlaygroundSearchListItem currentItem    = (PlaygroundSearchListItem) getItem(i);
+        TextView distanceTextView               = view.findViewById(R.id.distance);
+        TextView streetTextView                 = view.findViewById(R.id.searchItem_street);
+        TextView townTextView                   = view.findViewById(R.id.searchItem_town);
+        RatingBar ratingBar                     = view.findViewById(R.id.ratingBar);
+        ImageView imageView                     = view.findViewById(R.id.imageView);
+        String distance                         = currentItem.getDistance() + " km";
 
-        // get the TextView for item name and item description
-        TextView locationTextView = (TextView) view.findViewById(R.id.street);
-        TextView distanceTextView = (TextView) view.findViewById(R.id.distance);
-        RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-
-        String distance = currentItem.getDistance() + " km";
-
-        //sets the text for item name and item description from the current item object
-        locationTextView.setText(currentItem.getLocation());
         distanceTextView.setText(distance);
+        streetTextView.setText(currentItem.getStreet());
+        townTextView.setText(currentItem.getTown());
         ratingBar.setRating(currentItem.getRating());
-        if (currentItem.getMiniature() != null) {
+        setRatingBarColor(ratingBar);
+
+        if (currentItem.getMiniature() != null)
+        {
             imageView.setImageBitmap(currentItem.getMiniature());
         }
 
-        setRatingBarColor(ratingBar);
-
-        // returns the view for the current row
         return view;
     }
 

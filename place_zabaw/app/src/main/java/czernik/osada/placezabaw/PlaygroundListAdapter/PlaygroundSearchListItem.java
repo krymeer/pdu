@@ -1,51 +1,70 @@
 package czernik.osada.placezabaw.PlaygroundListAdapter;
 
 import android.graphics.Bitmap;
-import android.media.Image;
+//import android.media.Image;
 
 public class PlaygroundSearchListItem {
+    private int id;
     private String distance;
-    private String location;
+    private String town;
+    private String street;
     private Bitmap miniature;
     private float rating;
 
-    public PlaygroundSearchListItem(String location, String distance, Bitmap miniature, float rating)
-    {
+    public PlaygroundSearchListItem(int id, String town, String street, String distance, Bitmap miniature, float rating) {
+        setId(id);
         setDistance(distance);
-        setLocation(location);
+        setTown(town);
+        setStreet(street);
         setMiniature(miniature);
         setRating(rating);
     }
 
-    public String getDistance() {
-        return distance;
+    public int getId() {
+        return this.id;
     }
 
-    public void setDistance(String distance) {
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDistance() {
+        return this.distance;
+    }
+
+    private void setDistance(String distance) {
         this.distance = distance;
     }
 
-    public String getLocation() {
-        return location;
+    String getTown() {
+        return this.town;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    private void setTown(String town) {
+        this.town = town;
     }
 
-    public Bitmap getMiniature() {
+    public String getStreet() {
+        return this.street;
+    }
+
+    private void setStreet(String street) {
+        this.street = street;
+    }
+
+    Bitmap getMiniature() {
         return miniature;
     }
 
-    public void setMiniature(Bitmap miniature) {
+    private void setMiniature(Bitmap miniature) {
         this.miniature = miniature;
     }
 
-    public float getRating() {
-        return rating;
+    float getRating() {
+        return this.rating;
     }
 
-    public void setRating(float rating) {
+    private void setRating(float rating) {
         this.rating = rating;
     }
 }

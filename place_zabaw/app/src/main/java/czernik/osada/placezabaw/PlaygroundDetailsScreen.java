@@ -9,72 +9,75 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import czernik.osada.placezabaw.database.PlaygroundTable;
+import czernik.osada.placezabaw.database.PlaygroundsDataBase;
 
 public class PlaygroundDetailsScreen extends AppCompatActivity{
-    private String address;
-    private float rating;
-    private String description;
-    private String functionalities;
+    private int id;
+    private String town;
+    private String street;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playground_details);
-        TextView addressTextView    = findViewById(R.id.playgroundDetails_address);
-        TextView distanceTextView   = findViewById(R.id.playgroundDetails_distance);
-        TextView playgroundDetailsFeaturesTextView  = findViewById(R.id.playgroundDetails_features);
-        TextView playgroundDetailsDescriptionTextView   = findViewById(R.id.playgroundDetails_descriptionView);
-        RatingBar ratingBar         = findViewById(R.id.playgroundDetails_rating);
-        Intent intent               = getIntent();
-        Bundle bundle               = intent.getExtras();
-        String distance;
+        TextView descriptionTextView    = findViewById(R.id.playgroundDetails_descriptionView);
+        TextView distanceTextView       = findViewById(R.id.playgroundDetails_distance);
+        TextView featuresTextView       = findViewById(R.id.playgroundDetails_features);
+        TextView streetTextView         = findViewById(R.id.playgroundComments_street);
+        TextView townTextView           = findViewById(R.id.playgroundComments_town);
+        RatingBar ratingBar             = findViewById(R.id.playgroundDetails_rating);
+        Intent intent                   = getIntent();
+        Bundle bundle                   = intent.getExtras();
 
         if (bundle != null)
         {
-            if (intent.hasExtra("address"))
+            if (intent.hasExtra("playgroundId"))
             {
-                this.address = bundle.getString("address");
-                addressTextView.setText(this.address);
-            }
+                this.id                 = bundle.getInt("playgroundId");
+                PlaygroundTable table   = PlaygroundsDataBase.getInstance().getPlayground(this.id);
 
-            if (intent.hasExtra("distance"))
-            {
-                distance = bundle.getString("distance") + " km";
-                distanceTextView.setText(distance);
-            }
+                if (table != null)
+                {
+                    String description  = table.getDescription();
+                    String distance     = table.getDistance() + " km";
+                    String features     = table.getFeatures().toString().replaceAll("[\\[\\]]", "").replaceAll("(;\\s*|,\\s*)", "\n");
+                    String street       = table.getStreet();
+                    String town         = table.getTown();
+                    float rating        = (float) table.getRating();
+                    this.town           = town;
+                    this.street         = street;
 
-            if (intent.hasExtra("rating"))
-            {
-                this.rating = bundle.getFloat("rating");
-                ratingBar.setRating(this.rating);
+                    distanceTextView.setText(distance);
+                    descriptionTextView.setText(description);
+                    featuresTextView.setText(features);
+                    streetTextView.setText(street);
+                    townTextView.setText(town);
+                    ratingBar.setRating(rating);
+                }
             }
-
-            if (intent.hasExtra("description"))
-            {
-                this.description = bundle.getString("description");
-                playgroundDetailsDescriptionTextView.setText(description);
-            }
-
-            if (intent.hasExtra("functionalities"))
-            {
-                this.functionalities =  bundle.getString("functionalities");
-                this.functionalities = this.functionalities.replace(";", "\n");
-                playgroundDetailsFeaturesTextView.setText(functionalities);
-            }
+        }
+        else
+        {
+            Toast.makeText(this, R.string.something_wrong, Toast.LENGTH_LONG).show();
         }
     }
 
     public void onRateBtnClick(View view)
     {
         Intent intent = new Intent(this, PlaygroundCommentsScreen.class);
-        intent.putExtra("rating", this.rating);
-        intent.putExtra("address", this.address);
+        intent.putExtra("playgroundId", this.id);
+        intent.putExtra("street", this.street);
+        intent.putExtra("town", this.town);
         startActivity(intent);
     }
 
     public void onMapBtnClick(View view) {
-        Uri intentUri = Uri.parse("geo:0,0?q=" + Uri.encode(this.address));
-        Intent intent = new Intent(Intent.ACTION_VIEW, intentUri);
+        String address  = this.town + ", " + this.street;
+        Uri intentUri   = Uri.parse("geo:0,0?q=" + Uri.encode(address));
+        Intent intent   = new Intent(Intent.ACTION_VIEW, intentUri);
         intent.setPackage("com.google.android.apps.maps");
 
         if (intent.resolveActivity(getPackageManager()) != null)
@@ -84,8 +87,10 @@ public class PlaygroundDetailsScreen extends AppCompatActivity{
     }
 
     public void onReportBtnClick(View view) {
-        Intent intent = new Intent(this, ReportScreen.class);
-        intent.putExtra("address", this.address);
+        Intent intent   = new Intent(this, ReportScreen.class);
+        String address  = this.town + ", " + this.street;
+        intent.putExtra("playgroundId", this.id);
+        intent.putExtra("address", address);
         startActivityForResult(intent, 1);
     }
 

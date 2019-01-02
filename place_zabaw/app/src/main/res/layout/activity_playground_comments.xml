@@ -4,29 +4,8 @@
     android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/playgroundDetails_header"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:src="@drawable/ic_photo"
-            android:contentDescription="@string/ic_photo"
-            android:id="@+id/playgroundDetails_photo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
-        <ImageView
-            android:src="@drawable/ic_share"
-            android:contentDescription="@string/ic_share"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
-    </android.support.constraint.ConstraintLayout>
+    <include layout="@layout/playground_details_header"/>
+
     <android.support.constraint.ConstraintLayout
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,35 +13,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_below="@id/playgroundDetails_header"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="10dp">
+        android:layout_height="0dp">
 
-        <TextView
-            android:textStyle="bold"
-            android:id="@+id/playgroundComments_address"
-            android:text="@string/playground_address_default"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textSize="32sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <include layout="@layout/playground_details_address"/>
 
         <ListView
             android:id="@+id/playgroundComments_list"
-            android:layout_marginLeft="10dp"
             android:divider="@color/colorBackground"
             android:dividerHeight="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playgroundComments_address"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_below="@id/playgroundComments_address"
             android:clipToPadding="false"
             />
     </android.support.constraint.ConstraintLayout>

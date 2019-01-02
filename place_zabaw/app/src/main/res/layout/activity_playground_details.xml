@@ -4,27 +4,7 @@
     android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/playgroundDetails_header"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:src="@drawable/ic_photo"
-            android:id="@+id/playgroundDetails_photo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
-        <ImageView
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_share"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="48dp"
-            android:layout_height="48dp" />
-    </android.support.constraint.ConstraintLayout>
+    <include layout="@layout/playground_details_header"/>
 
     <ScrollView
         android:layout_width="0dp"
@@ -33,153 +13,149 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playgroundDetails_header">
+
         <android.support.constraint.ConstraintLayout
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:layout_height="wrap_content">
 
-            <!-- TODO
-                Data in this field ought to be split into two parts:
-                - a city/town/village etc.,
-                - a street with an optional number
-            -->
-            <TextView
-                android:textStyle="bold"
-                android:id="@+id/playgroundDetails_address"
-                android:text="Adres placu zabaw"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textSize="32sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/playgroundDetails_distance"
-                android:layout_marginTop="5dp"
-                app:layout_constraintTop_toBottomOf="@id/playgroundDetails_address"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="- km"
-                android:textColor="@color/colorStandardText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <RatingBar
-                app:layout_constraintTop_toTopOf="@id/playgroundDetails_distance"
-                app:layout_constraintBottom_toBottomOf="@id/playgroundDetails_distance"
-                app:layout_constraintStart_toEndOf="@id/playgroundDetails_distance"
-                style="@style/Base.Widget.AppCompat.RatingBar.Small"
-                android:layout_marginStart="10dp"
-                android:id="@+id/playgroundDetails_rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:isIndicator="true"/>
+            <include layout="@layout/playground_details_address"/>
 
             <android.support.constraint.ConstraintLayout
-                android:paddingTop="20dp"
-                app:layout_constraintTop_toBottomOf="@id/playgroundDetails_rating"
+                app:layout_constraintTop_toBottomOf="@id/playgroundComments_address"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/playgroundDetails_actionButtons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <Button
-                    android:drawableStart="@drawable/ic_rate"
-                    android:drawablePadding="5dp"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:id="@+id/playgroundDetails_rateBtn"
-                    android:layout_height="48dp"
-                    android:layout_width="wrap_content"
-                    android:background="@color/colorAccent"
-                    android:fontFamily="@font/roboto"
-                    android:text="@string/rates"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:onClick="onRateBtnClick"
-                    />
-
-                <Button
-                    android:drawableStart="@drawable/ic_map"
-                    android:drawablePadding="5dp"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:id="@+id/playgroundDetails_mapBtn"
-                    app:layout_constraintStart_toEndOf="@id/playgroundDetails_rateBtn"
-                    android:layout_height="48dp"
-                    android:layout_width="wrap_content"
-                    android:background="@color/colorAccent"
-                    android:fontFamily="@font/roboto"
-                    android:text="@string/find"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:onClick="onMapBtnClick"
-                    />
-
-                <Button
-                    android:drawableStart="@drawable/ic_error"
-                    android:drawablePadding="5dp"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:id="@+id/playgroundDetails_reportBtn"
-                    app:layout_constraintStart_toEndOf="@id/playgroundDetails_mapBtn"
-                    android:layout_height="48dp"
-                    android:layout_width="wrap_content"
-                    android:background="@color/colorAlert"
-                    android:fontFamily="@font/roboto"
-                    android:text="@string/report_error"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:onClick="onReportBtnClick"
-                    />
-            </android.support.constraint.ConstraintLayout>
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/playgroundDetails_actionButtons"
-                android:id="@+id/playgroundDetails_featuresHeader"
-                android:paddingTop="20dp"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="@string/features"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/playgroundDetails_featuresHeader"
-                android:id="@+id/playgroundDetails_features"
-                android:paddingTop="5dp"
-                android:textSize="16sp"
-                android:textColor="@color/colorStandardText"
-                android:text="tu będzie lista funkcjonalności..."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:paddingTop="20dp"
-                app:layout_constraintTop_toBottomOf="@id/playgroundDetails_features"
-                android:id="@+id/playgroundDetails_descriptionHeader"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="@string/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                app:layout_constraintTop_toBottomOf="@id/playgroundDetails_descriptionHeader"
-                android:paddingTop="5dp"
-                android:id="@+id/playgroundDetails_descriptionView"
-                android:paddingBottom="5dp"
-                android:textSize="14sp"
-                android:textColor="@color/colorStandardText"
-                android:text="@string/lipsum"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/playgroundDetails_distance"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/distance_default"
+                    android:textColor="@color/colorStandardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RatingBar
+                    app:layout_constraintTop_toTopOf="@id/playgroundDetails_distance"
+                    app:layout_constraintBottom_toBottomOf="@id/playgroundDetails_distance"
+                    app:layout_constraintStart_toEndOf="@id/playgroundDetails_distance"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/playgroundDetails_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"/>
+
+                <android.support.constraint.ConstraintLayout
+                    android:paddingTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/playgroundDetails_rating"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/playgroundDetails_actionButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:drawableStart="@drawable/ic_rate"
+                        android:drawablePadding="5dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:id="@+id/playgroundDetails_rateBtn"
+                        android:layout_height="48dp"
+                        android:layout_width="wrap_content"
+                        android:background="@color/colorAccent"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/rates"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:onClick="onRateBtnClick"
+                        />
+
+                    <Button
+                        android:drawableStart="@drawable/ic_map"
+                        android:drawablePadding="5dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:id="@+id/playgroundDetails_mapBtn"
+                        app:layout_constraintStart_toEndOf="@id/playgroundDetails_rateBtn"
+                        android:layout_height="48dp"
+                        android:layout_width="wrap_content"
+                        android:background="@color/colorAccent"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/find"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:onClick="onMapBtnClick"
+                        />
+
+                    <Button
+                        android:drawableStart="@drawable/ic_error"
+                        android:drawablePadding="5dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:id="@+id/playgroundDetails_reportBtn"
+                        app:layout_constraintStart_toEndOf="@id/playgroundDetails_mapBtn"
+                        android:layout_height="48dp"
+                        android:layout_width="wrap_content"
+                        android:background="@color/colorAlert"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/report_error"
+                        android:textAllCaps="false"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:onClick="onReportBtnClick"
+                        />
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/playgroundDetails_actionButtons"
+                    android:id="@+id/playgroundDetails_featuresHeader"
+                    android:paddingTop="20dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/features"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/playgroundDetails_featuresHeader"
+                    android:id="@+id/playgroundDetails_features"
+                    android:paddingTop="5dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorStandardText"
+                    android:text="@string/features_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:paddingTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/playgroundDetails_features"
+                    android:id="@+id/playgroundDetails_descriptionHeader"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    app:layout_constraintTop_toBottomOf="@id/playgroundDetails_descriptionHeader"
+                    android:paddingTop="5dp"
+                    android:id="@+id/playgroundDetails_descriptionView"
+                    android:paddingBottom="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorStandardText"
+                    android:text="@string/lipsum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

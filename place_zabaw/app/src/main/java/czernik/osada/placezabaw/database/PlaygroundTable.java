@@ -2,89 +2,110 @@ package czernik.osada.placezabaw.database;
 
 import android.graphics.Bitmap;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PlaygroundTable {
-    private String address;
+    private int id;
+    private String town;
+    private String street;
     private double rating;
     private String description;
     private Bitmap image;
-    private List<String> functionalities;
+    private List<String> features;
     private double distance;
     private double price;
 
-    public PlaygroundTable(String address, double rating, String description, Bitmap image, double distance, double price, String[] functionalities) {
-        setAddress(address);
+    PlaygroundTable(int id, String town, String street, double rating, String description, Bitmap image, double distance, double price, String[] features) {
+        setId(id);
+        setTown(town);
+        setStreet(street);
         setRating(rating);
         setDescription(description);
         setImage(image);
-        setFunctionalities(functionalities);
+        setFeatures(features);
         setDistance(distance);
         setPrice(price);
     }
 
-    public String getAddress() {
-        return address;
+    public int getId() {
+        return this.id;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    public String getStreet() {
+        return this.street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getTown() {
+        return this.town;
+    }
+
+    private void setTown(String town) {
+        this.town = town;
     }
 
     public double getRating() {
-        return rating;
+        return this.rating;
     }
 
-    public void setRating(double rating) {
+    private void setRating(double rating) {
         this.rating = rating;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
-    public void setDescription(String description) {
+    private void setDescription(String description) {
         this.description = description;
     }
 
     public Bitmap getImage() {
-        return image;
+        return this.image;
     }
 
-    public void setImage(Bitmap image) {
+    private void setImage(Bitmap image) {
         this.image = image;
     }
 
-    public List<String> getFunctionalities() {
-        return functionalities;
+    public List<String> getFeatures() {
+        return this.features;
     }
 
-    public void setFunctionalities(String[] functionalities) {
-        this.functionalities = new ArrayList<>(Arrays.asList(functionalities));
+    private void setFeatures(String[] features) {
+        this.features = new ArrayList<>(Arrays.asList(features));
     }
 
     public double getDistance() {
-        return distance;
+        return this.distance;
     }
 
-    public void setDistance(double distance) {
+    private void setDistance(double distance) {
         this.distance = distance;
     }
 
-    public double getPrice() {
+    double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    private void setPrice(double price) {
         this.price = price;
     }
 
-    public boolean containsAllFunctionalities(List<String> functionalities) {
-        for (String func: this.functionalities) {
-            if (!functionalities.contains(func)) {
+    boolean containsAllFeatures(List<String> features) {
+        for (String feature : this.features)
+        {
+            if (!features.contains(feature))
+            {
                 return true;
             }
         }

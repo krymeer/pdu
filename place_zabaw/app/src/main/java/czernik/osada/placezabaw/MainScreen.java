@@ -99,43 +99,23 @@ public class MainScreen extends AppCompatActivity
     }
 
     private void onPlaygroundListItemClicked(AdapterView<?> adapterView, View view, int i, long l) {
-        PlaygroundSearchListItem item = (PlaygroundSearchListItem) adapterView.getItemAtPosition(i);
-        Intent intent = new Intent(this, PlaygroundDetailsScreen.class);
-        PlaygroundTable playgroundTable = PlaygroundsDataBase.getInstance().getPlayground(item.getLocation());
-        String func = "";
-        for (String f: playgroundTable.getFunctionalities()) {
-            func += f + ";";
-        }
+        PlaygroundSearchListItem item   = (PlaygroundSearchListItem) adapterView.getItemAtPosition(i);
+        Intent intent                   = new Intent(this, PlaygroundDetailsScreen.class);
 
-        if (playgroundTable != null) {
-            // Put test data
-            intent.putExtra("address", item.getLocation()); /* TODO - change address with ID */
-            intent.putExtra("distance", item.getDistance());
-            intent.putExtra("rating", item.getRating());
-            intent.putExtra("description", playgroundTable.getDescription());
-            intent.putExtra("functionalities", func);
-            startActivity(intent);
-        } else {
-            Toast.makeText(MainScreen.this, R.string.something_wrong, Toast.LENGTH_LONG).show();
-        }
+        intent.putExtra("playgroundId", item.getId());
+        startActivity(intent);
     }
 
     private List<PlaygroundSearchListItem> getFavoritePlaygrounds(int count) {
         //TODO add connection to DB
         List<PlaygroundSearchListItem> favorites  = new ArrayList<>(5);
-        for (PlaygroundTable p: PlaygroundsDataBase.getInstance().getPlaygrounds()) {
-            PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getAddress(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
+
+        for (PlaygroundTable p: PlaygroundsDataBase.getInstance().getPlaygrounds())
+        {
+            PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getId(), p.getTown(), p.getStreet(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
             favorites.add(psli);
         }
-        /*
-        favorites.add(new PlaygroundSearchListItem("Wrocław, al. Kromera 67", "1,5 km", null, 4.5f));
-        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Nowowiejska 5", "2,5 km", null, 3.5f));
-        favorites.add(new PlaygroundSearchListItem("Wrocław, pl. Grunwaldzki 103", "3,7 km", null, 1.5f));
-        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Kościuszki 67", "6,1 km", null, 2.0f));
-        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
-        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
-        favorites.add(new PlaygroundSearchListItem("Wrocław, ul. Drzymały 1", "7,5 km", null, 3.7f));
-        */
+
         return favorites;
     }
 
@@ -249,8 +229,10 @@ public class MainScreen extends AppCompatActivity
                 List<PlaygroundTable> playgrounds = PlaygroundsDataBase.getInstance().getPlaygrounds(priceFrom, priceTo, ratingFrom, ratingTo, func);
 
                 List<PlaygroundSearchListItem> searchResultItems  = new ArrayList<>();
-                for (PlaygroundTable p: playgrounds) {
-                    PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getAddress(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
+
+                for (PlaygroundTable p: playgrounds)
+                {
+                    PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getId(), p.getTown(), p.getStreet(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
                     searchResultItems.add(psli);
                 }
 

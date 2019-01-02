@@ -14,9 +14,9 @@ import java.util.List;
 import czernik.osada.placezabaw.CommentsListAdapter.*;
 
 public class PlaygroundCommentsScreen extends AppCompatActivity {
-    ListView commentsListView;
-    TextView addressTextView;
-    String address;
+    private String street;
+    private String town;
+    private int id;
 
     private List<CommentsListItem> getComments() {
         List<CommentsListItem> comments = new ArrayList<>();
@@ -33,7 +33,7 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
     private void initCommentList() {
         List<CommentsListItem> itemsList        = getComments();
         CommentsListAdapter commentsListAdapter = new CommentsListAdapter(this, itemsList);
-        commentsListView                        = findViewById(R.id.playgroundComments_list);
+        ListView commentsListView               = findViewById(R.id.playgroundComments_list);
         View buttonView                         = View.inflate(this, R.layout.button_add_comment, null);
 
         commentsListView.setAdapter(commentsListAdapter);
@@ -46,27 +46,44 @@ public class PlaygroundCommentsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_playground_comments);
         initCommentList();
 
-        addressTextView = findViewById(R.id.playgroundComments_address);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
+        TextView streetTextView     = findViewById(R.id.playgroundComments_street);
+        TextView townTextView       = findViewById(R.id.playgroundComments_town);
+        Intent intent               = getIntent();
+        Bundle bundle               = intent.getExtras();
 
-        if (bundle != null) {
-            if (intent.hasExtra("address")) {
-                address = bundle.getString("address");
-                addressTextView.setText(address);
+        if (bundle != null)
+        {
+            if (intent.hasExtra("playgroundId"))
+            {
+                this.id = bundle.getInt("playgroundId");
+            }
+
+            if (intent.hasExtra("street"))
+            {
+                this.street = bundle.getString("street");
+                streetTextView.setText(this.street);
+            }
+
+            if (intent.hasExtra("town"))
+            {
+                this.town = bundle.getString("town");
+                townTextView.setText(this.town);
             }
         }
     }
 
     public void onAddCommentBtnClick(View view) {
-        Intent intent = new Intent(this, AddCommentScreen.class);
+        Intent intent   = new Intent(this, AddCommentScreen.class);
+        String address  = this.town + ", " + this.street;
+        intent.putExtra("playgroundId", this.id);
         intent.putExtra("address", address);
         startActivityForResult(intent, 1);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK)
+        {
             Snackbar.make(findViewById(android.R.id.content), R.string.request_sent, Snackbar.LENGTH_LONG).show();
         }
     }

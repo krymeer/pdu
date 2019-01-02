@@ -34,7 +34,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
     private AutoCompleteTextView priceToText;
     private AutoCompleteTextView ratingFromText;
     private AutoCompleteTextView ratingToText;
-    private TextView functionatitiesTextView;
+    private TextView featuresTextView;
     private Locator locator;
 
     @Override
@@ -50,7 +50,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
         priceToText = (AutoCompleteTextView)findViewById(R.id.priceTo);
         ratingFromText = (AutoCompleteTextView)findViewById(R.id.ratingFrom);
         ratingToText = (AutoCompleteTextView)findViewById(R.id.ratingTo);
-        functionatitiesTextView = (TextView) findViewById(R.id.functionalities_text_view);
+        featuresTextView = (TextView) findViewById(R.id.functionalities_text_view);
 
         priceFromText.setOnFocusChangeListener(this);
         priceToText.setOnFocusChangeListener(this);
@@ -82,7 +82,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
             double priceTo = 0;
             double ratingFrom = Double.MIN_VALUE;
             double ratingTo = Double.MAX_VALUE;
-            String functionalities = functionatitiesTextView.getText().toString();
+            String functionalities = featuresTextView.getText().toString();
 
             if (!freeEntryCheckBox.isChecked()) {
                 if (TextUtils.isEmpty(priceFromText.getText().toString()))
@@ -126,9 +126,9 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
         }
     }
 
-    public void onFunctionalitiesListClick(View view)
+    public void onFeaturesListClick(View view)
     {
-        FunctionalitiesAlertDialogBuilder builder = new FunctionalitiesAlertDialogBuilder(this, functionatitiesTextView);
+        FunctionalitiesAlertDialogBuilder builder = new FunctionalitiesAlertDialogBuilder(this, featuresTextView);
         builder.show();
     }
 
