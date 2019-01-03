@@ -8,221 +8,246 @@
     android:background="@color/colorBackground"
     android:orientation="vertical">
 
-    <!-- toolbar -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat"
+        android:theme="@style/CustomToolbarTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/title_activity_search_screen"
         app:titleTextColor="#fff" >
-
     </android.support.v7.widget.Toolbar>
 
-    <!-- fields -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/scrollView"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <!-- Search field -->
-            <RelativeLayout
+            <android.support.constraint.ConstraintLayout
+                android:padding="20dp"
+                android:id="@+id/search_mainWrapper"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
+                android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="302dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_street"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <ImageButton
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorPrimary"
-                    android:padding="3dp"
-                    android:scaleType="fitCenter"
-                    android:onClick="onLocationButtonClick"
-                    android:src="@android:drawable/ic_menu_mylocation" />
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="@string/search_filters_extra" />
-
-            <!-- price fields -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp">
-
-                <TextView
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/search_searchField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cena" />
-
-                <CheckBox
-                    android:id="@+id/free_entry_checkbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_filter_entry_free" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="20dp">
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="167dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/searchField_gpsIcon"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/search_searchField_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/prompt_street"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageButton
+                        android:id="@+id/searchField_gpsIcon"
+                        android:contentDescription="@string/ic_gps"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@android:color/transparent"
+                        android:adjustViewBounds="true"
+                        android:padding="3dp"
+                        android:scaleType="fitCenter"
+                        android:onClick="onLocationButtonClick"
+                        android:src="@drawable/ic_gps" />
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/search_filtersHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintTop_toBottomOf="@id/search_searchField"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:text="@string/search_filters_extra" />
+
+                <!-- Price fields -->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/search_priceFields"
+                    app:layout_constraintTop_toBottomOf="@id/search_filtersHeader"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <android.support.constraint.Guideline
+                        android:id="@+id/search_priceFields_guideline"
+                        android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5"
+                        />
+
+                    <android.support.design.widget.TextInputLayout
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/search_priceFields_guideline"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content">
 
                         <AutoCompleteTextView
-                            android:id="@+id/priceFrom"
+                            android:id="@+id/search_priceFields_priceFrom"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/prompt_price_from"
                             android:inputType="number"
                             android:maxLines="1"
                             android:singleLine="true" />
-
                     </android.support.design.widget.TextInputLayout>
 
                     <android.support.design.widget.TextInputLayout
-                        android:layout_width="167dp"
+                        app:layout_constraintStart_toStartOf="@id/search_priceFields_guideline"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content">
 
                         <AutoCompleteTextView
-                            android:id="@+id/priceTo"
+                            android:id="@+id/search_priceFields_priceTo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/prompt_price_to"
                             android:inputType="number"
                             android:maxLines="1"
                             android:singleLine="true" />
-
                     </android.support.design.widget.TextInputLayout>
+                </android.support.constraint.ConstraintLayout>
 
-                </LinearLayout>
+                <CheckBox
+                    android:id="@+id/search_priceFields_freeEntryCheckbox"
+                    app:layout_constraintTop_toBottomOf="@id/search_priceFields"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_filter_entry_free" />
 
-            </LinearLayout>
+                <!-- Rating fields -->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/search_ratingFields"
+                    app:layout_constraintTop_toBottomOf="@id/search_priceFields_freeEntryCheckbox"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_height="wrap_content">
 
-            <!-- rating fields -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="24dp">
+                    <android.support.constraint.ConstraintLayout
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+                        <android.support.constraint.Guideline
+                            android:id="@+id/search_ratingFields_guideline"
+                            android:layout_width="1dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5"
+                            />
+
+                        <android.support.design.widget.TextInputLayout
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/search_ratingFields_guideline"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/search_ratingField_ratingFrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/prompt_rating_from"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+                        <android.support.design.widget.TextInputLayout
+                            app:layout_constraintStart_toStartOf="@id/search_ratingFields_guideline"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/search_ratingField_ratingTo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/prompt_rating_to"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+
+                        </android.support.design.widget.TextInputLayout>
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.constraint.ConstraintLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:textSize="12sp"
+                    android:id="@+id/search_featuresList_header"
+                    android:text="@string/search_feature_list_header"
+                    android:textColor="@color/colorAccent"
+                    app:layout_constraintTop_toBottomOf="@+id/search_ratingFields"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="25dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/search_featuresList_wrapper"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Ocena" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/search_featuresList_header">
+                    <TextView
+                        android:id="@+id/search_featuresList"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/search_featuresList_addBtn"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:padding="4dp"
+                        android:background="@color/colorPrimaryExtraLight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="4"
+                        android:lines="4"
+                        android:onClick="onFeaturesListClick"
+                        android:text="@string/search_feature_list_hint" />
 
+                    <ImageView
+                        android:id="@+id/search_featuresList_addBtn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:background="@color/colorPrimaryLight"
+                        android:src="@drawable/ic_add"
+                        android:padding="4dp"
+                        android:layout_width="50dp"
+                        android:layout_height="0dp" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.constraint.ConstraintLayout>
 
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="167dp"
-                        android:layout_height="wrap_content">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/ratingFrom"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/prompt_rating_from"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            android:singleLine="true"/>
-
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="167dp"
-                        android:layout_height="wrap_content">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/ratingTo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/prompt_rating_to"
-                            android:inputType="number"
-                            android:maxLines="1"
-                            android:singleLine="true" />
-
-                    </android.support.design.widget.TextInputLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- functionalities -->
-            <TextView
-                android:id="@+id/functionalities_text_view"
-                android:gravity="start"
-                android:layout_height="fill_parent"
-                android:layout_width="wrap_content"
-                android:maxLines="4"
-                android:lines="4"
-                android:onClick="onFeaturesListClick"
-                android:layout_marginTop="24dp"
-                android:text="@string/click_to_add_functionalities" />
-
-
-
-            <Button
-                android:id="@+id/search_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginTop="16dp"
-                android:background="#e00"
-                android:fontFamily="@font/roboto"
-                android:textStyle="bold"
-                android:textColor="#fff"
-                android:onClick="onSearchButtonClick"
-                android:layout_marginBottom="10dp"
-                android:drawableStart="@android:drawable/ic_menu_search"
-                android:drawablePadding="20dp"
-                android:scaleType="fitStart"
-                android:adjustViewBounds="true"
-                android:text="@string/action_search"
-                android:textAlignment="center"
-                android:paddingHorizontal="50dp" />
-
-
-        </LinearLayout>
-
-
+            <include layout="@layout/button_search_start" />
+        </android.support.constraint.ConstraintLayout>
     </ScrollView>
-
 </LinearLayout>

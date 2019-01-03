@@ -44,20 +44,20 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
 
         setToolbar();
 
-        addressText = (AutoCompleteTextView)findViewById(R.id.address);
-        freeEntryCheckBox = (CheckBox)findViewById(R.id.free_entry_checkbox);
-        priceFromText = (AutoCompleteTextView)findViewById(R.id.priceFrom);
-        priceToText = (AutoCompleteTextView)findViewById(R.id.priceTo);
-        ratingFromText = (AutoCompleteTextView)findViewById(R.id.ratingFrom);
-        ratingToText = (AutoCompleteTextView)findViewById(R.id.ratingTo);
-        featuresTextView = (TextView) findViewById(R.id.functionalities_text_view);
+        addressText         = findViewById(R.id.search_searchField_address);
+        freeEntryCheckBox   = findViewById(R.id.search_priceFields_freeEntryCheckbox);
+        priceFromText       = findViewById(R.id.search_priceFields_priceFrom);
+        priceToText         = findViewById(R.id.search_priceFields_priceTo);
+        ratingFromText      = findViewById(R.id.search_ratingField_ratingFrom);
+        ratingToText        = findViewById(R.id.search_ratingField_ratingTo);
+        featuresTextView    = findViewById(R.id.search_featuresList);
 
         priceFromText.setOnFocusChangeListener(this);
         priceToText.setOnFocusChangeListener(this);
     }
 
     private void setToolbar() {
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -82,7 +82,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
             double priceTo = 0;
             double ratingFrom = Double.MIN_VALUE;
             double ratingTo = Double.MAX_VALUE;
-            String functionalities = featuresTextView.getText().toString();
+            String features = featuresTextView.getText().toString();
 
             if (!freeEntryCheckBox.isChecked()) {
                 if (TextUtils.isEmpty(priceFromText.getText().toString()))
@@ -99,7 +99,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
             if (!TextUtils.isEmpty(ratingToText.getText().toString()))
                 ratingTo = Double.parseDouble(ratingToText.getText().toString());
 
-            if (functionalities == getString(R.string.prompt_functionalities)) functionalities = "";
+            if (features == getString(R.string.prompt_functionalities)) features = "";
 
             Intent backIntent = new Intent(this, MainScreen.class);
             backIntent.putExtra("address", address);
@@ -107,7 +107,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
             backIntent.putExtra("priceTo", priceTo);
             backIntent.putExtra("ratingFrom", ratingFrom);
             backIntent.putExtra("ratingTo", ratingTo);
-            backIntent.putExtra("functionalities", functionalities);
+            backIntent.putExtra("functionalities", features);
             Log.e("set result", "result");
             setResult(Activity.RESULT_OK, backIntent);
             Log.e("set result", "result2");

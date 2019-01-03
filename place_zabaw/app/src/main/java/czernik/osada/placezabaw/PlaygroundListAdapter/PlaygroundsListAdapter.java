@@ -1,9 +1,9 @@
 package czernik.osada.placezabaw.PlaygroundListAdapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +71,7 @@ public class PlaygroundsListAdapter extends BaseAdapter {
 
     private void setRatingBarColor(RatingBar ratingBar) {
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(Color.rgb(255, 128, 0), PorterDuff.Mode.SRC_ATOP);
-        stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(2).setColorFilter(ResourcesCompat.getColor(this.context.getResources(), R.color.colorAccentLight, null), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(0).setColorFilter(ResourcesCompat.getColor(this.context.getResources(), R.color.colorBackground, null), PorterDuff.Mode.SRC_ATOP);
     }
 }

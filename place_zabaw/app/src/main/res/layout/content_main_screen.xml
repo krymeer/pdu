@@ -9,8 +9,6 @@
     tools:context=".MainScreen"
     tools:showIn="@layout/app_bar_main_screen">
 
-    <!-- TODO title of the list as an XML element -->
-
     <ListView
         android:id="@+id/playgroundsList"
         android:divider="@color/colorBackground"
