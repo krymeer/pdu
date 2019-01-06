@@ -1,33 +1,20 @@
 package czernik.osada.placezabaw;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.ScrollView;
+import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchScreen extends AppCompatActivity implements View.OnFocusChangeListener {
-
     private AutoCompleteTextView addressText;
     private CheckBox freeEntryCheckBox;
     private AutoCompleteTextView priceFromText;
@@ -35,13 +22,12 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
     private AutoCompleteTextView ratingFromText;
     private AutoCompleteTextView ratingToText;
     private TextView featuresTextView;
-    private Locator locator;
+    private ConstraintLayout priceFieldsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_screen);
-
         setToolbar();
 
         addressText         = findViewById(R.id.search_searchField_address);
@@ -51,17 +37,39 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
         ratingFromText      = findViewById(R.id.search_ratingField_ratingFrom);
         ratingToText        = findViewById(R.id.search_ratingField_ratingTo);
         featuresTextView    = findViewById(R.id.search_featuresList);
+        priceFieldsLayout   = findViewById(R.id.search_priceFields);
 
         priceFromText.setOnFocusChangeListener(this);
         priceToText.setOnFocusChangeListener(this);
+
+        freeEntryCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
+                {
+                    priceFromText.setEnabled(false);
+                    priceToText.setEnabled(false);
+                    priceFieldsLayout.setAlpha(0.5f);
+                }
+                else
+                {
+                    priceFromText.setEnabled(true);
+                    priceToText.setEnabled(true);
+                    priceFieldsLayout.setAlpha(1.0f);
+                }
+            }
+        });
     }
 
     private void setToolbar() {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null)
+        {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
     }
 
     @Override
@@ -99,7 +107,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
             if (!TextUtils.isEmpty(ratingToText.getText().toString()))
                 ratingTo = Double.parseDouble(ratingToText.getText().toString());
 
-            if (features == getString(R.string.prompt_functionalities)) features = "";
+            if (features.equals(getString(R.string.prompt_functionalities))) features = "";
 
             Intent backIntent = new Intent(this, MainScreen.class);
             backIntent.putExtra("address", address);
@@ -133,8 +141,7 @@ public class SearchScreen extends AppCompatActivity implements View.OnFocusChang
     }
 
     public void onLocationButtonClick(View view) {
-        locator = new Locator(this, this, addressText);
+        FusedLocator locator = new FusedLocator(this, this, addressText);
         locator.getLocation();
-
     }
 }
