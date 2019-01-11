@@ -102,6 +102,20 @@ public class PlaygroundsDataBase {
         return playgrounds;
     }
 
+    public List<PlaygroundTable> getPlaygrounds(String address) {
+        List<PlaygroundTable> list = new ArrayList<>();
+
+        for (PlaygroundTable playgroundTable : playgrounds)
+        {
+            if (address.contains(playgroundTable.getStreet()) && address.contains(playgroundTable.getTown()))
+            {
+                list.add(playgroundTable);
+            }
+        }
+
+        return list;
+    }
+
     public List<PlaygroundTable> getPlaygrounds(double priceFrom, double priceTo, double ratingFrom, double ratingTo, List<String> features) {
         List<PlaygroundTable> result = new ArrayList<>();
         for (PlaygroundTable playgroundTable : playgrounds)

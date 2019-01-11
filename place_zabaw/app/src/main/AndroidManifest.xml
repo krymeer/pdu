@@ -45,7 +45,6 @@
             android:label="@string/title_activity_register" />
         <activity android:name=".ProfileScreen" />
         <activity android:name=".AddPlaygroundScreen" />
-        <activity android:name=".AddPlaygroundActivity" />
         <activity android:name=".DeleteScreen" />
         <activity android:name=".ReportScreen" />
         <activity android:name=".PlaygroundCommentsScreen" />

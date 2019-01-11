@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -20,7 +21,6 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,13 +34,12 @@ import czernik.osada.placezabaw.database.PlaygroundsDataBase;
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int REQUEST_ADD = 2;
+    private static final int REQUEST_ADD    = 2;
     private static final int REQUEST_REPORT = 3;
     private static final int REQUEST_DELETE = 4;
     private ListView playgroundsListView;
     private Toolbar toolbar;
     private TextView listHeaderText;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +47,9 @@ public class MainScreen extends AppCompatActivity
         setContentView(R.layout.activity_main_screen);
 
         initToolbar();
-        initHamburgetMenu();
+        initHamburgerMenu();
         initListHeaderText();
-        initPlaygroundList();
+        initPlaygroundsList();
 
         listHeaderText.setText(R.string.your_playgrounds);
     }
@@ -69,7 +68,7 @@ public class MainScreen extends AppCompatActivity
         setSupportActionBar(toolbar);
     }
 
-    private void initHamburgetMenu() {
+    private void initHamburgerMenu() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -80,8 +79,8 @@ public class MainScreen extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void initPlaygroundList() {
-        List<PlaygroundSearchListItem> itemsList        = getFavoritePlaygrounds(5);
+    private void initPlaygroundsList() {
+        List<PlaygroundSearchListItem> itemsList        = getFavoritePlaygrounds();
         PlaygroundsListAdapter playgroundsListAdapter   = new PlaygroundsListAdapter(this, itemsList);
         View buttonView                                 = View.inflate(this, R.layout.button_search, null);
         playgroundsListView                             = findViewById(R.id.playgroundsList);
@@ -89,7 +88,7 @@ public class MainScreen extends AppCompatActivity
         playgroundsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                onPlaygroundListItemClicked(adapterView, view, i, l);
+                onPlaygroundListItemClicked(adapterView, i);
             }
         });
 
@@ -98,7 +97,7 @@ public class MainScreen extends AppCompatActivity
         playgroundsListView.addFooterView(buttonView);
     }
 
-    private void onPlaygroundListItemClicked(AdapterView<?> adapterView, View view, int i, long l) {
+    private void onPlaygroundListItemClicked(AdapterView<?> adapterView, int i) {
         PlaygroundSearchListItem item   = (PlaygroundSearchListItem) adapterView.getItemAtPosition(i);
         Intent intent                   = new Intent(this, PlaygroundDetailsScreen.class);
 
@@ -106,14 +105,14 @@ public class MainScreen extends AppCompatActivity
         startActivity(intent);
     }
 
-    private List<PlaygroundSearchListItem> getFavoritePlaygrounds(int count) {
+    private List<PlaygroundSearchListItem> getFavoritePlaygrounds() {
         //TODO add connection to DB
-        List<PlaygroundSearchListItem> favorites  = new ArrayList<>(5);
+        List<PlaygroundSearchListItem> favorites = new ArrayList<>(5);
 
         for (PlaygroundTable p: PlaygroundsDataBase.getInstance().getPlaygrounds())
         {
-            PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getId(), p.getTown(), p.getStreet(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
-            favorites.add(psli);
+            PlaygroundSearchListItem item = new PlaygroundSearchListItem(p.getId(), p.getTown(), p.getStreet(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
+            favorites.add(item);
         }
 
         return favorites;
@@ -121,10 +120,14 @@ public class MainScreen extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else
+        {
             minimizeApp();
         }
     }
@@ -144,7 +147,8 @@ public class MainScreen extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (id == R.id.action_search)
+        {
             Intent intent = new Intent(this, SearchScreen.class);
             startActivityForResult(intent, 1);
             return true;
@@ -154,27 +158,36 @@ public class MainScreen extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile) {
+        if (id == R.id.nav_profile)
+        {
             Intent intent = new Intent(this, ProfileScreen.class);
             startActivity(intent);
-        } else if (id == R.id.nav_add_playground) {
+        }
+        else if (id == R.id.nav_add_playground)
+        {
             Intent intent = new Intent(this, AddPlaygroundScreen.class);
             startActivityForResult(intent, REQUEST_ADD);
-        } else if (id == R.id.nav_delete_playground) {
+        }
+        else if (id == R.id.nav_delete_playground)
+        {
             Intent intent = new Intent(this, DeleteScreen.class);
             startActivityForResult(intent, REQUEST_DELETE);
-        } else if (id == R.id.nav_report) {
+        }
+        else if (id == R.id.nav_report)
+        {
             Intent intent = new Intent(this, ReportScreen.class);
             startActivityForResult(intent, REQUEST_REPORT);
-        } else if (id == R.id.nav_logout) {
+        }
+        else if (id == R.id.nav_logout)
+        {
             logOut();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -205,7 +218,7 @@ public class MainScreen extends AppCompatActivity
         startActivity(startMain);
     }
 
-    public void onSearchButtonClick(View view) {
+    public void onSearchButtonClick(View view){
         Intent intent = new Intent(this, SearchScreen.class);
         startActivityForResult(intent, 1);
     }
@@ -213,27 +226,30 @@ public class MainScreen extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == 1)
+        {
             //TODO add connection to DB
-            if(resultCode == Activity.RESULT_OK){
+            if(resultCode == Activity.RESULT_OK)
+            {
                 listHeaderText.setText(R.string.search_result_text);
-                String address = data.getStringExtra("address");
-                double priceFrom = data.getDoubleExtra("priceFrom", 0.0);
-                double priceTo = data.getDoubleExtra("priceTo", Double.MAX_VALUE);
-                double ratingFrom = data.getDoubleExtra("ratingFrom", 0);
-                double ratingTo = data.getDoubleExtra("ratingTo", 5);
-                String functionalities = data.getStringExtra("address");
-                List<String> func = new ArrayList<>(Arrays.asList(functionalities.split(";")));
+                String address          = data.getStringExtra("address");
+                String featStr          = data.getStringExtra("features");
+                double priceFrom        = data.getDoubleExtra("priceFrom", 0.0);
+                double priceTo          = data.getDoubleExtra("priceTo", Double.MAX_VALUE);
+                double ratingFrom       = data.getDoubleExtra("ratingFrom", 0);
+                double ratingTo         = data.getDoubleExtra("ratingTo", 5);
+                List<String> features   = new ArrayList<>(Arrays.asList(featStr.split(";")));
 
-                Log.e("func", func.toString());
-                List<PlaygroundTable> playgrounds = PlaygroundsDataBase.getInstance().getPlaygrounds(priceFrom, priceTo, ratingFrom, ratingTo, func);
+                Log.e("features", features.toString());
+                List<PlaygroundSearchListItem> searchResultItems    = new ArrayList<>();
+                List<PlaygroundTable> playgrounds                   = PlaygroundsDataBase.getInstance().getPlaygrounds(address);
+                playgrounds.addAll(PlaygroundsDataBase.getInstance().getPlaygrounds(priceFrom, priceTo, ratingFrom, ratingTo, features));
 
-                List<PlaygroundSearchListItem> searchResultItems  = new ArrayList<>();
 
-                for (PlaygroundTable p: playgrounds)
+                for (PlaygroundTable p : playgrounds)
                 {
-                    PlaygroundSearchListItem psli = new PlaygroundSearchListItem(p.getId(), p.getTown(), p.getStreet(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
-                    searchResultItems.add(psli);
+                    PlaygroundSearchListItem item = new PlaygroundSearchListItem(p.getId(), p.getTown(), p.getStreet(), Double.toString(p.getDistance()), p.getImage(), (float)p.getRating());
+                    searchResultItems.add(item);
                 }
 
                 PlaygroundsListAdapter playgroundsListAdapter = new PlaygroundsListAdapter(this, searchResultItems);
@@ -241,8 +257,10 @@ public class MainScreen extends AppCompatActivity
 
             }
         }
-        if (requestCode == REQUEST_ADD || requestCode == REQUEST_DELETE || requestCode == REQUEST_REPORT) {
-            if (resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_ADD || requestCode == REQUEST_DELETE || requestCode == REQUEST_REPORT)
+        {
+            if (resultCode == Activity.RESULT_OK)
+            {
                 Snackbar.make(findViewById(android.R.id.content), R.string.request_sent,Snackbar.LENGTH_LONG).show();
             }
         }
