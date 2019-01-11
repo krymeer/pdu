@@ -47,9 +47,11 @@ public class PlaygroundsDataBase {
     private List<UserTable> initUsers() {
         /* UserTable(String email, String password, Date registerDate, int numberOfComments, int numberOfRatings) */
         UserTable u1 = new UserTable(DUMMY_CREDENTIALS[0], DUMMY_CREDENTIALS[1], "Jan Kowalski", new Date(1544389935), 3, 5);
+        UserTable u2 = new UserTable("adam.nowak@placezabaw.pl", "1234pass", "Adam Nowak", new Date(1547236321), 10, 10);
 
         List<UserTable> users = new ArrayList<>();
         users.add(u1);
+        users.add(u2);
         return users;
     }
 
